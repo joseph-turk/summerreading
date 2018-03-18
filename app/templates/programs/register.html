@@ -1,0 +1,60 @@
+{% extends 'shared/layout.html' %} {% block content %}
+{% load static %}
+
+<h2 class="display-4">Register for {{ program.name }}</h2>
+
+{% if program.is_full %}
+<h2>This program is currently full. You will be placed on the wait list.</h2>
+{% endif %}
+
+<p>{{ program.description }}</p>
+
+<p>{{ program.date }} at {{ program.time }}</p>
+
+<p>Capacity: {{ program.capacity }}</p>
+<p>Slots Taken: {{ program.registration_set.count }}</p>
+
+
+<form action="{% url 'app:add_registration' program.id %}" method="post">
+  {% csrf_token %}
+
+  <div class="row">
+    <div class="col-lg">
+        <h3>Your Information</h3>
+
+        <div class="form-group">
+          <label for="adultname">Your Name</label>
+          <input type="text" id="adultname" name="adultname" class="form-control" required>
+        </div>
+      
+        <div class="form-group">
+          <label for="adultemail">Your Email Address</label>
+          <input type="email" id="adultemail" name="adultemail" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="col-lg">
+        <div id="children">
+            <h3>Children to Register</h3>
+        
+            <div class="form-group">
+              <label for="childname1">Child's name</label>
+              <input type="text" id="childname1" name="childname1" class="form-control">
+            </div>
+          </div>
+        
+          <button id="addChild" class="btn btn-sm btn-primary" type="button">Add Another Child</button>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <button class="btn btn-primary">Register</button>
+    <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
+  </div>
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'shared/multiadd.js' %}"></script>
+{% endblock scripts %}

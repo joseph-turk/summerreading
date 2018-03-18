@@ -1,0 +1,31 @@
+{% extends 'shared/layout.html' %}
+{% block content %}
+
+<h2 class="display-4">{{ program.name }}</h2>
+
+<p>{{ program.description }}</p>
+
+<p>{{ program.date }} at {{ program.time }}</p>
+
+<h3>Registered for This Program</h3>
+<ul>
+{% for registration in program.registration_set.all %}
+  {% if not registration.is_wait_list %}
+  <li>{{ registration.child }} ({{ registration.child.adult.name }})</li>
+  {% endif %}
+{% endfor %}
+</ul>
+
+<h3>Wait List for This Program</h3>
+<ul>
+  {% for registration in program.registration_set.all %}
+    {% if registration.is_wait_list %}
+    <li>{{ registration.child }} ({{ registration.child.adult.name }})</li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+<a href="{% url 'app:register' program.id %}" class="btn btn-primary">Register</a>
+<a href="javascript:history.back()" class="btn btn-secondary">Back</a>
+
+{% endblock content %}

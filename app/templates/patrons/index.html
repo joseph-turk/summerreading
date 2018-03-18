@@ -1,0 +1,33 @@
+{% extends 'shared/layout.html' %}
+{% block content %}
+
+<h2 class="page-title">Patrons</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Children</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      {% for patron in patrons %}
+      <tr>
+        <td>{{ patron.name }}</td>
+        <td>{{ patron.email }}</td>
+        <td>
+          {% for child in patron.child_set.all %}
+            <div class="font-weight-bold">{{ child.name }}</div>
+            {% for registration in child.registration_set.all %}
+              <div>{{ registration.program.name }}</div>
+            {% endfor %}
+          {% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}

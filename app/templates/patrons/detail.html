@@ -1,0 +1,14 @@
+{% extends 'shared/layout.html' %}
+{% block content %}
+
+<h2 class="display-4">{{ adult.name }}</h2>
+
+<h3>Children</h3>
+
+<ul>
+  {% for child in adult.child_set.all %}
+    <li>{{ child.name }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'shared/layout.html' %}
+{% block content %}
+
+<h2 class="display-4">Eager Free Public Library<br>
+<small>Summer Reading</small></h2>
+
+<div class="row mt-5">
+  <div class="col-12 mb-4">
+    <div class="card bg-primary text-white">
+      <div class="card-body">
+        <p class="h5 m-3">Here will be some introductory text explaining what to do.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg mb-4 mb-lg-0">
+    <div class="card">
+      <div class="card-body">
+          <h3>Upcoming Programs</h3>
+
+          <p>Here are the five soonest programs. Register today!</p>
+
+          {% for program in programs %}
+          <p class="my-3">
+            <a href="{% url 'app:detail' program.id %}">{{ program.name }}</a><br>
+            {{ program.description|truncatechars:100 }}
+          </p>
+          {% endfor %}
+
+          <a href="{% url 'app:programs' %}" class="btn btn-primary mt-4">See All</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3>More Information</h3>
+
+        <p>Here will be some more information. Maybe a link to the main EFPL site?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}
