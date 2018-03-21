@@ -10,3 +10,7 @@ body {
 footer {
   height: 36px;
 }
+
+img {
+  max-width: 100%;
+}

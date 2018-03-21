@@ -7,6 +7,8 @@ class Program(models.Model):
     date = models.DateField()
     time = models.TimeField()
     capacity = models.IntegerField()
+    is_teen = models.BooleanField(default=False)
+    graphic = models.ImageField(upload_to='graphics', default='graphic.jpg')
     is_full = models.BooleanField()
 
     def __str__(self):

@@ -34,6 +34,24 @@ class IndexView(generic.ListView):
         return Program.objects.order_by('date')
 
 
+class KidProgramsIndex(generic.ListView):
+    template_name = 'programs/index.html'
+    context_object_name = 'programs'
+
+    def get_queryset(self):
+        '''Return all kids programs.'''
+        return Program.objects.exclude(is_teen=True).order_by('date')
+
+
+class TeenProgramsIndex(generic.ListView):
+    template_name = 'programs/index.html'
+    context_object_name = 'programs'
+
+    def get_queryset(self):
+        '''Return all teen programs.'''
+        return Program.objects.exclude(is_teen=False).order_by('date')
+
+
 class DetailView(generic.DetailView):
     model = Program
     template_name = 'programs/detail.html'
