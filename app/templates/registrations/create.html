@@ -23,7 +23,7 @@
     <tbody>
       {% for program in programs %}
         <tr>
-          <td><input type="checkbox" name="selectprogram"></td>
+          <td><input type="checkbox" name="select-program-{{ program.id }}" id="select-program-{{ program.id }}"></td>
           <td>{{ program.name }}</td>
           <td>{{ program.capacity }}</td>
           <td>{{ program.slots_left }}</td>
