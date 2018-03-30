@@ -1,33 +1,51 @@
-{% extends 'shared/layout.html' %}
-{% block content %}
+{% extends 'shared/layout.html' %} {% block content %}
 
-<h2 class="display-4">{{ program.name }}</h2>
+<h2 class="display-4 text-center">{{ program.name }}</h2>
 
-<img src="{{ program.graphic.url }}">
+<hr>
 
-<p>{{ program.description }}</p>
+<div class="row">
+  <div class="col">
+    <img src="{{ program.graphic.url }}" class="program-graphic">
+  </div>
 
-<p>{{ program.date }} at {{ program.time }}</p>
+  <div class="col">
+    <h3>Program Description</h3>
+    <p>{{ program.description }}</p>
 
-<h3>Registered for This Program</h3>
-<ul>
-{% for registration in program.registration_set.all %}
-  {% if not registration.is_wait_list %}
-  <li>{{ registration.child }} ({{ registration.child.adult.name }})</li>
-  {% endif %}
-{% endfor %}
-</ul>
+    <h3>Date and Time</h3>
+    <p>{{ program.date }} at {{ program.time }}</p>
 
-<h3>Wait List for This Program</h3>
-<ul>
-  {% for registration in program.registration_set.all %}
-    {% if registration.is_wait_list %}
-    <li>{{ registration.child }} ({{ registration.child.adult.name }})</li>
-    {% endif %}
-  {% endfor %}
-</ul>
+    <a href="{% url 'app:register' program.id %}" class="btn btn-primary">Register</a>
+    <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
+  </div>
+</div>
 
-<a href="{% url 'app:register' program.id %}" class="btn btn-primary">Register</a>
-<a href="javascript:history.back()" class="btn btn-secondary">Back</a>
 
-{% endblock content %}
+{% if user.is_authenticated %}
+
+<h2 class="display-4 text-center mt-5">Registration Information</h2>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <h3>Registered for This Program</h3>
+    <ul>
+      {% for registration in program.registration_set.all %} {% if not registration.is_wait_list %}
+      <li>{{ registration.child }} ({{ registration.child.adult.name }})</li>
+      {% endif %} {% endfor %}
+    </ul>
+  </div>
+
+  <div class="col">
+    <h3>Wait List for This Program</h3>
+    <ul>
+      {% for registration in program.registration_set.all %} {% if registration.is_wait_list %}
+      <li>{{ registration.child }} ({{ registration.child.adult.name }})</li>
+      {% endif %} {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endif %} {% endblock content %}

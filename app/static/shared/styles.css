@@ -14,3 +14,8 @@ footer {
 img {
   max-width: 100%;
 }
+
+img.program-graphic {
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
