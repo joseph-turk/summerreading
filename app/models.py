@@ -11,6 +11,14 @@ class Program(models.Model):
     graphic = models.ImageField(upload_to='graphics', default='graphic.jpg')
     is_full = models.BooleanField()
 
+    @property
+    def slots_left(self):
+        slots = self.capacity - self.registration_set.count()
+        if slots < 0:
+            return 0
+        else:
+            return slots
+
     def __str__(self):
         return self.name
 

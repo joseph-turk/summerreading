@@ -16,6 +16,11 @@ urlpatterns = [
          views.add_registration, name='add_registration'),
     path('programs/<int:program_id>/confirmed',
          views.confirmed, name='confirmation'),
+    path('register/', views.grid_register, name='grid_register'),
+    path('register/add_registration', views.add_grid_registration,
+         name='add_grid_registration'),
+    path('register/confirmation', views.grid_confirmation,
+         name='grid_confirmation'),
     path('patrons/', views.PatronsIndex.as_view(), name='patrons'),
     path('patrons/<int:pk>', views.PatronDetail.as_view(), name='patron')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

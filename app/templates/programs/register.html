@@ -1,12 +1,16 @@
-{% extends 'shared/layout.html' %} {% block content %} {% load static %} {% if program.is_full %}
-<div class="card bg-warning">
+{% extends 'shared/layout.html' %}
+{% block content %}
+{% load static %}
+
+{% if program.is_full %}
+<div class="card bg-warning mb-5">
   <div class="card-body">
     <h2 class="mb-0">This program is currently full. You will be placed on the wait list.</h2>
   </div>
 </div>
 {% endif %}
 
-<h2 class="display-4 text-center mt-5">{{ program.name }}</h2>
+<h2 class="display-4 text-center">{{ program.name }}</h2>
 
 <hr>
 
@@ -74,6 +78,8 @@
   </div>
 </div>
 
-{% endblock content %} {% block scripts %}
+{% endblock content %}
+
+{% block scripts %}
 <script src="{% static 'shared/multiadd.js' %}"></script>
 {% endblock scripts %}

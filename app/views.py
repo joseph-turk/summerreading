@@ -62,6 +62,15 @@ def register(request, program_id):
     return render(request, 'programs/register.html', {'program': program})
 
 
+def grid_register(request):
+    programs = get_list_or_404(Program)
+    return render(request, 'registrations/create.html', {'programs': programs})
+
+
+def add_grid_registration(request):
+    return HttpResponseRedirect(reverse('app:grid_confirmation'))
+
+
 def add_registration(request, program_id):
     program = get_object_or_404(Program, pk=program_id)
 
@@ -95,10 +104,21 @@ def add_registration(request, program_id):
     return HttpResponseRedirect(reverse('app:confirmation', args=(program.id,)))
 
 
+# Registration Views
+# ------------------
+
 class RegistrationCreate(generic.edit.CreateView):
+    '''Single Program Registration'''
     model = Registration
     success_url = reverse_lazy('programs')
     fields = ['program', 'child', 'is_wait_list']
+
+
+# class RegistrationGridCreate(generic.edit.CreateView):
+#     '''Multiple Program Registration'''
+#     model = Registration
+#     success_url = reverse_lazy('programs')
+#     fields = ['program', 'child', 'is_wait_list']
 
 
 class PatronsIndex(generic.ListView):
@@ -118,3 +138,7 @@ class PatronDetail(generic.DetailView):
 def confirmed(request, program_id):
     program = get_object_or_404(Program, pk=program_id)
     return render(request, 'programs/confirmation.html', {'program': program})
+
+
+def grid_confirmation(request):
+    return render(request, 'registrations/confirmation.html')
