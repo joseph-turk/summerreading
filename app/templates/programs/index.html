@@ -2,32 +2,34 @@
 {% load static %}
 {% block content %}
 
-<img src="{% static 'shared/graphics/libraries_rock.jpg' %}" alt="Libraries Rock Banner" class="mw-100">
+{% comment %} <img src="{% static 'shared/graphics/libraries_rock.jpg' %}" alt="Libraries Rock Banner" class="mw-100"> {% endcomment %}
 
-<h2 class="display-4">Programs</h2>
+<h2 class="display-4 text-center">Programs</h2>
 
-  <div class="row">
-    {% for program in programs %}
-      <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h3>{{ program.name }}</h3>
-    
-              <p class="program-description--list">{{ program.description }}</p>
-    
-              <ul>
-                <li>Capacity: {{ program.capacity }}</li>
-                <li>Registered: {{ program.registration_set.count }}</li>
-                <li>Date: {{ program.date }}</li>
-                <li>Time: {{ program.time }}</li>
-              </ul>
-              
-              <a href="{% url 'app:register' program.id %}" class="btn btn-primary">Register</a>
-              <a href="{% url 'app:detail' program.id %}" class="btn btn-secondary">Details</a>
-            </div>
+<hr>
+
+<div class="row">
+  {% for program in programs %}
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3>{{ program.name }}</h3>
+  
+            <p class="program-description--list">{{ program.description|truncatechars:250 }}</p>
+  
+            <ul>
+              <li>Capacity: {{ program.capacity }}</li>
+              <li>Registered: {{ program.registration_set.count }}</li>
+              <li>Date: {{ program.date }}</li>
+              <li>Time: {{ program.time }}</li>
+            </ul>
+            
+            <a href="{% url 'app:register' program.id %}" class="btn btn-primary">Register</a>
+            <a href="{% url 'app:detail' program.id %}" class="btn btn-secondary">Details</a>
           </div>
-      </div>
-    {% endfor %}
-  </div>
+        </div>
+    </div>
+  {% endfor %}
+</div>
 
 {% endblock %}

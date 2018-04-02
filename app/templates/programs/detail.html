@@ -16,6 +16,10 @@
     <h3>Date and Time</h3>
     <p>{{ program.date }} at {{ program.time }}</p>
 
+    <h3>Capacity</h3>
+    <p class="mb-0">Capacity: {{ program.capacity }}</p>
+    <p>Slots Left: {{ program.slots_left }}</p>
+
     <a href="{% url 'app:register' program.id %}" class="btn btn-primary">Register</a>
     <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
   </div>

@@ -25,6 +25,14 @@ class HomeView(generic.ListView):
         return Program.objects.exclude(date__lt=datetime.today()).order_by('date')[:5]
 
 
+def kids_home(request):
+    return render(request, 'home/kids.html')
+
+
+def teens_home(request):
+    return render(request, 'home/teens.html')
+
+
 class IndexView(generic.ListView):
     template_name = 'programs/index.html'
     context_object_name = 'programs'
@@ -67,7 +75,44 @@ def grid_register(request):
     return render(request, 'registrations/create.html', {'programs': programs})
 
 
+def grid_register_kids(request):
+    programs = get_list_or_404(Program, is_teen=False)
+    return render(request, 'registrations/create.html', {'programs': programs})
+
+
+def grid_register_teens(request):
+    programs = get_list_or_404(Program, is_teen=True)
+    return render(request, 'registrations/create.html', {'programs': programs})
+
+
 def add_grid_registration(request):
+    programs = []
+
+    adult, created = Adult.objects.get_or_create(
+        name=request.POST['adultname'],
+        email=request.POST['adultemail'],
+        notify=False
+    )
+
+    for key in request.POST:
+        if key.startswith('program-'):
+            program = get_object_or_404(Program, pk=key[8:])
+            programs.append(program)
+
+    for key in request.POST:
+        if key.startswith('childname'):
+            child, created = Child.objects.get_or_create(
+                name=request.POST[key],
+                adult=adult
+            )
+
+            for program in programs:
+                registration, created = Registration.objects.get_or_create(
+                    program=program,
+                    child=child,
+                    is_wait_list=program.is_full
+                )
+
     return HttpResponseRedirect(reverse('app:grid_confirmation'))
 
 

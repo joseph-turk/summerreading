@@ -19,12 +19,9 @@
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item {% if request.path == '/' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'app:home' %}">Home</a>
-            </li>
-            <li class="nav-item {% if request.path == '/programs/' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'app:programs' %}">Programs</a>
+              <a href="{% url 'app:home' %}" class="nav-link">Home</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
@@ -32,6 +29,25 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+            </li>
+            {% endif %}
+          </ul>
+
+          <ul class="navbar-nav ml-auto">
+            {% if request.path|slice:':5' == '/kids' %}
+            <li class="nav-item {% if request.path == '/kids/programs/' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'app:kid_programs' %}">Programs</a>
+            </li>
+            <li class="nav-item {% if request.path == '/kids/register/' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'app:grid_register_kids' %}">Register</a>
+            </li>
+            {% endif %}
+            {% if request.path|slice:':6' == '/teens' %}
+            <li class="nav-item {% if request.path == '/teens/programs/' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'app:teen_programs' %}">Programs</a>
+            </li>
+            <li class="nav-item {% if request.path == '/teens/register/' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'app:grid_register_teens' %}">Register</a>
             </li>
             {% endif %}
           </ul>
