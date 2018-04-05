@@ -1,14 +1,19 @@
 body {
   padding-top: 56px;
   padding-bottom: 36px;
+  min-height: 100vh;
+  position: relative;
 }
 
 .main-content {
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 }
 
 footer {
   height: 36px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 img {

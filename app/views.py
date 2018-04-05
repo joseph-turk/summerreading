@@ -72,17 +72,34 @@ def register(request, program_id):
 
 def grid_register(request):
     programs = get_list_or_404(Program)
-    return render(request, 'registrations/create.html', {'programs': programs})
+    return render(request,
+                  'registrations/create.html',
+                  {
+                      'programs': programs,
+                      'type': 'teens'
+                  })
 
 
 def grid_register_kids(request):
-    programs = get_list_or_404(Program, is_teen=False)
-    return render(request, 'registrations/create.html', {'programs': programs})
+    programs = get_list_or_404(Program.objects.order_by(
+        'date'), is_teen=False, date__gt=datetime.today())
+    return render(request,
+                  'registrations/create.html',
+                  {
+                      'programs': programs,
+                      'type': 'kids'
+                  })
 
 
 def grid_register_teens(request):
-    programs = get_list_or_404(Program, is_teen=True)
-    return render(request, 'registrations/create.html', {'programs': programs})
+    programs = get_list_or_404(
+        Program, is_teen=True, date__gt=datetime.today())
+    return render(request,
+                  'registrations/create.html',
+                  {
+                      'programs': programs,
+                      'type': 'teens'
+                  })
 
 
 def add_grid_registration(request):
@@ -91,6 +108,7 @@ def add_grid_registration(request):
     adult, created = Adult.objects.get_or_create(
         name=request.POST['adultname'],
         email=request.POST['adultemail'],
+        phone=request.POST['adultphone'],
         notify=False
     )
 

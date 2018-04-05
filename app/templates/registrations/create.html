@@ -2,7 +2,14 @@
 {% block content %}
 {% load static %}
 
-<h2 class="display-4 text-center">Select Programs</h2>
+<h1 class="display-3 mb-5">
+  Register for
+  {% if type == 'kids' %} Kids {% endif %}
+  {% if type == 'teens' %} Teen {% endif %}
+  Programs
+</h1>
+
+<h2 class="display-4">Select Programs</h2>
 
 <form action="{% url 'app:add_grid_registration' %}" method="post">
   {% csrf_token %}
@@ -23,19 +30,24 @@
     <tbody>
       {% for program in programs %}
         <tr>
-          <td><input type="checkbox" name="program-{{ program.id }}" id="select-program-{{ program.id }}"></td>
-          <td>{{ program.name }}</td>
+          <td><input type="checkbox" name="program-{{ program.id }}" id="program-{{ program.id }}"></td>
+          <td><label for="program-{{ program.id }}">{{ program.name }}</label></td>
           <td>{{ program.capacity }}</td>
           <td>{{ program.slots_left }}</td>
           <td>{{ program.date }}</td>
           <td>{{ program.time }}</td>
-          <td><a href="{% url 'app:detail' program.id %}" class="btn btn-primary">Details</a></td>
+          {% if type == 'kids' %}
+          <td><a href="{% url 'app:kids_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
+          {% endif %}
+          {% if type == 'teens' %}
+          <td><a href="{% url 'app:teen_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
+          {% endif %}
         </tr>
       {% endfor %}
     </tbody>
   </table>
 
-  <h2 class="display-4 text-center mt-5">Register</h2>
+  <h2 class="display-4 mt-5">Register</h2>
 
   <hr>
 
@@ -52,6 +64,11 @@
           <label for="adultemail">Your Email Address</label>
           <input type="email" id="adultemail" name="adultemail" class="form-control" required>
         </div>
+
+        <div class="form-group">
+          <label for="adultphone">Your Phone Number</label>
+          <input type="phone" id="adultphone" name="adultphone" class="form-control" required>
+        </div>
       </div>
 
       <div class="col-lg">
@@ -60,7 +77,7 @@
 
           <div class="form-group">
             <label for="childname1">Child's name</label>
-            <input type="text" id="childname1" name="childname1" class="form-control">
+            <input type="text" id="childname1" name="childname1" class="form-control" required>
           </div>
         </div>
 

@@ -15,6 +15,10 @@ urlpatterns = [
     path('kids/programs/', views.KidProgramsIndex.as_view(), name='kid_programs'),
     path('teens/programs/', views.TeenProgramsIndex.as_view(), name='teen_programs'),
     path('programs/<int:pk>', views.DetailView.as_view(), name='detail'),
+    path('kids/programs/<int:pk>', views.DetailView.as_view(),
+         name="kids_program_detail"),
+    path('teens/programs/<int:pk>', views.DetailView.as_view(),
+         name='teen_program_detail'),
     # Registration Views
     path('programs/<int:program_id>/register', views.register, name='register'),
     path('programs/<int:program_id>/add_registration',

@@ -20,9 +20,7 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% if request.path == '/' %} active {% endif %}">
-              <a href="{% url 'app:home' %}" class="nav-link">Home</a>
-            </li>
+            
             {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'app:patrons' %}">Patrons</a>
@@ -34,22 +32,15 @@
           </ul>
 
           <ul class="navbar-nav ml-auto">
-            {% if request.path|slice:':5' == '/kids' %}
-            <li class="nav-item {% if request.path == '/kids/programs/' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'app:kid_programs' %}">Programs</a>
+            <li class="nav-item {% if request.path == '/' %} active {% endif %}">
+              <a href="{% url 'app:home' %}" class="nav-link">Home</a>
             </li>
-            <li class="nav-item {% if request.path == '/kids/register/' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'app:grid_register_kids' %}">Register</a>
+            <li class="nav-item {% if request.path|slice:':5' == '/kids' %} active {% endif %}">
+              <a href="{% url 'app:kids_home' %}" class="nav-link">Kids</a>
             </li>
-            {% endif %}
-            {% if request.path|slice:':6' == '/teens' %}
-            <li class="nav-item {% if request.path == '/teens/programs/' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'app:teen_programs' %}">Programs</a>
+            <li class="nav-item {% if request.path|slice:':6' == '/teens' %} active {% endif %}">
+              <a href="{% url 'app:teens_home' %}" class="nav-link">Teens</a>
             </li>
-            <li class="nav-item {% if request.path == '/teens/register/' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'app:grid_register_teens' %}">Register</a>
-            </li>
-            {% endif %}
           </ul>
         </div>
       </nav>
@@ -59,7 +50,7 @@
       {% endblock %}
   </div>
   
-  <footer class="fixed-bottom bg-secondary text-light d-flex align-items-center pl-3">
+  <footer class="bg-secondary text-light d-flex align-items-center pl-3">
     &copy; {% now "Y" %} Eager Free Public Library
   </footer>
 
