@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from datetime import date
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Program(models.Model):
@@ -12,10 +13,6 @@ class Program(models.Model):
     is_teen = models.BooleanField(default=False)
     graphic = models.ImageField(upload_to='graphics', default='graphic.jpg')
     is_full = models.BooleanField()
-
-    @property
-    def is_past(self):
-        return False
 
     @property
     def slots_left(self):
@@ -32,12 +29,7 @@ class Program(models.Model):
 class Adult(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
-    phone_regex = RegexValidator(
-        regex=r'^d{3}\-?d{3}-?d{4}$',
-        message='Phone number must be in the format \'123-456-7890\'.')
-    phone = models.CharField(
-        validators=[phone_regex],
-        max_length=12)
+    phone = models.CharField(max_length=12)
     notify = models.BooleanField()
 
     def __str__(self):
