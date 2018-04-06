@@ -1,6 +1,7 @@
-{% extends 'shared/layout.html' %} {% block content %}
+{% extends 'shared/layout.html' %}
+{% block content %}
 
-<h2 class="display-4 text-center">{{ program.name }}</h2>
+<h2 class="display-4">{{ program.name }}</h2>
 
 <hr>
 
@@ -20,8 +21,12 @@
     <p class="mb-0">Capacity: {{ program.capacity }}</p>
     <p>Slots Left: {{ program.slots_left }}</p>
 
-    <a href="{% url 'app:register' program.id %}" class="btn btn-primary">Register</a>
-    <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
+    {% if request.path|slice:':5' == '/kids' %}
+    <a href="{% url 'app:grid_register_kids' %}" class="btn btn-primary">Register</a>
+    {% endif %}
+    {% if request.path|slice:':5' == '/teen' %}
+    <a href="{% url 'app:grid_register_teens' %}" class="btn btn-primary">Register</a>
+    {% endif %}
   </div>
 </div>
 
@@ -52,4 +57,5 @@
   </div>
 </div>
 
-{% endif %} {% endblock content %}
+{% endif %}
+{% endblock content %}
