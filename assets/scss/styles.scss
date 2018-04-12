@@ -1,0 +1,32 @@
+$primary: #2ca3e1;
+$secondary: #666;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+body {
+  padding-top: 56px;
+  padding-bottom: 36px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  padding: 2rem 1rem;
+}
+
+footer {
+  height: 36px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+img.program-graphic {
+  border-radius: 0.25rem;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); */
+}
+

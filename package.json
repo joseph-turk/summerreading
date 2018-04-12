@@ -1,0 +1,27 @@
+{
+  "name": "summerreading",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node ./tasks/sass.js",
+    "watch": "nodemon -e scss -x 'npm run sass'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joseph-turk/summerreading.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joseph-turk/summerreading/issues"
+  },
+  "homepage": "https://github.com/joseph-turk/summerreading#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "node-sass": "^4.8.3",
+    "nodemon": "^1.17.3",
+    "postcss": "^6.0.21",
+    "sass-lint": "^1.12.1"
+  }
+}
