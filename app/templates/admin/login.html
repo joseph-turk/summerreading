@@ -21,7 +21,7 @@
         <h2>Admin Login</h2>
 
         <form action="/admin/login/" method="post" id="login-form" _lpchecked="1">
-          <input type="hidden" name="csrfmiddlewaretoken" value="iG7xnqD7uoWL6BkgVLgwsAjK8asACekybYihmqFhbLDCx1dIzAv5IxCjHh0Kiz7w">
+          {% csrf_token %}
           
           <div class="form-group">
             <label class="required" for="id_username">Username</label>

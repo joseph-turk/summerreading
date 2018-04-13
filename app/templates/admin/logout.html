@@ -1,0 +1,17 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="mb-4">You are now logged out.</h2>
+        
+        <a class="btn btn-primary" href="{% url 'app:home' %}">Go to Home Page</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

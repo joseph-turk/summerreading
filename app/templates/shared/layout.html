@@ -18,18 +18,6 @@
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'app:patrons' %}">Patrons</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
-            </li>
-            {% endif %}
-          </ul>
-
           <ul class="navbar-nav ml-auto">
             <li class="nav-item {% if request.path == '/' %} active {% endif %}">
               <a href="{% url 'app:home' %}" class="nav-link">Home</a>
@@ -40,6 +28,17 @@
             <li class="nav-item {% if request.path|slice:':6' == '/teens' %} active {% endif %}">
               <a href="{% url 'app:teens_home' %}" class="nav-link">Teens</a>
             </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item {% if request.path|slice:':8' == '/patrons' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'app:patrons' %}">Patrons</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin:logout' %}">Log Out</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </nav>
