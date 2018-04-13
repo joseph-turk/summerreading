@@ -1,0 +1,46 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row mb-5">
+  <div class="col-10 offset-1">
+      <div class="card bg-warning">
+          <div class="card-body">
+            <p class="h3 mb-4">This administrative page is for Eager Free Public Library staff only.</p>
+    
+            <p class="mb-0">If you are a patron looking for registration information, you do not need to log in. Please return to the <a href="{% url 'app:home' %}">home page</a>.</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6 offset-3">
+    <div class="card">
+      <div class="card-body">
+        <h2>Admin Login</h2>
+
+        <form action="/admin/login/" method="post" id="login-form" _lpchecked="1">
+          <input type="hidden" name="csrfmiddlewaretoken" value="iG7xnqD7uoWL6BkgVLgwsAjK8asACekybYihmqFhbLDCx1dIzAv5IxCjHh0Kiz7w">
+          
+          <div class="form-group">
+            <label class="required" for="id_username">Username</label>
+            <input class="form-control" type="text" name="username" autofocus="" maxlength="254" required="" id="id_username" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAUBJREFUOBGVVE2ORUAQLvIS4gwzEysHkHgnkMiEc4zEJXCMNwtWTmDh3UGcYoaFhZUFCzFVnu4wIaiE+vvq6+6qTgthGH6O4/jA7x1OiCAIPwj7CoLgSXDxSjEVzAt9k01CBKdWfsFf/2WNuEwc2YqigKZpK9glAlVVwTTNbQJZlnlCkiTAZnF/mePB2biRdhwHdF2HJEmgaRrwPA+qqoI4jle5/8XkXzrCFoHg+/5ICdpm13UTho7Q9/0WnsfwiL/ouHwHrJgQR8WEwVG+oXpMPaDAkdzvd7AsC8qyhCiKJjiRnCKwbRsMw9hcQ5zv9maSBeu6hjRNYRgGFuKaCNwjkjzPoSiK1d1gDDecQobOBwswzabD/D3Np7AHOIrvNpHmPI+Kc2RZBm3bcp8wuwSIot7QQ0PznoR6wYSK0Xb/AGVLcWwc7Ng3AAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+          </div>
+
+          <div class="form-group">
+            <label class="required" for="id_password">Password</label>
+            <input class="form-control" type="password" name="password" required="" id="id_password" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAUBJREFUOBGVVE2ORUAQLvIS4gwzEysHkHgnkMiEc4zEJXCMNwtWTmDh3UGcYoaFhZUFCzFVnu4wIaiE+vvq6+6qTgthGH6O4/jA7x1OiCAIPwj7CoLgSXDxSjEVzAt9k01CBKdWfsFf/2WNuEwc2YqigKZpK9glAlVVwTTNbQJZlnlCkiTAZnF/mePB2biRdhwHdF2HJEmgaRrwPA+qqoI4jle5/8XkXzrCFoHg+/5ICdpm13UTho7Q9/0WnsfwiL/ouHwHrJgQR8WEwVG+oXpMPaDAkdzvd7AsC8qyhCiKJjiRnCKwbRsMw9hcQ5zv9maSBeu6hjRNYRgGFuKaCNwjkjzPoSiK1d1gDDecQobOBwswzabD/D3Np7AHOIrvNpHmPI+Kc2RZBm3bcp8wuwSIot7QQ0PznoR6wYSK0Xb/AGVLcWwc7Ng3AAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+            <input type="hidden" name="next" value="/admin/">
+          </div>
+          
+          <div class="mt-4">
+            <input class="btn btn-primary w-100" type="submit" value="Log in">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
