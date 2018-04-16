@@ -31,10 +31,10 @@
     <p>Slots Left: {{ program.slots_left }}</p>
 
     {% if request.path|slice:':5' == '/kids' %}
-    <a href="{% url 'app:grid_register_kids' %}" class="btn btn-primary">Back to Registration</a>
+    <a href="{% url 'app:kids_home' %}" class="btn btn-primary">Back to Registration</a>
     {% endif %}
     {% if request.path|slice:':5' == '/teen' %}
-    <a href="{% url 'app:grid_register_teens' %}" class="btn btn-primary">Back to Registration</a>
+    <a href="{% url 'app:teens_home' %}" class="btn btn-primary">Back to Registration</a>
     {% endif %}
   </div>
 </div>
