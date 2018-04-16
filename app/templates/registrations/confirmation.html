@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
 
+{% comment %} <h2 class="display-4">Thank you!</h2> {% endcomment %}
+
 <div class="card bg-primary mb-4">
   <div class="card-body text-light">
     <h2 class="mb-4">Registration Confirmed</h2>
@@ -12,7 +14,6 @@
   </div>
 </div>
 
-<h2 class="display-4">{{ patron.name }}</h2>
 <hr>
 
 <div class="row">
@@ -20,6 +21,7 @@
     <h3>Your Information</h3>
 
     <ul>
+      <li><strong>Name:</strong> {{ patron.name }}</li>
       <li><strong>Email Address:</strong> {{ patron.email }}</li>
       <li><strong>Phone Number:</strong> {{ patron.phone }}</li>
     </ul>
@@ -58,5 +60,9 @@
     </table>
   </div>
 </div>
+
+<hr>
+
+<p>If any of the above information is incorrect, please send an email to <a href="mailto:#">summer-reading@efpl.com</a> and include confirmation number {{ patron.id }}.</p>
 
 {% endblock content %}
