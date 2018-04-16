@@ -2,8 +2,6 @@
 {% load static %}
 {% block content %}
 
-{% comment %} <img src="{% static 'shared/graphics/libraries_rock.jpg' %}" alt="Libraries Rock Banner" class="mw-100"> {% endcomment %}
-
 <h2 class="display-4">All Programs</h2>
 
 <table class="table">
@@ -12,6 +10,7 @@
       <th>Name</th>
       <th>Capacity</th>
       <th>Registered</th>
+      <th>Wait Listed</th>
       <th>Date</th>
       <th>Time</th>
       <th></th>
@@ -23,7 +22,8 @@
       <tr>
         <td>{{ program.name }}</td>
         <td>{{ program.capacity }}</td>
-        <td>{{ program.registration_set.count }}</td>
+        <td>{{ program.slots_filled }}</td>
+        <td>{{ program.num_wait_list }}</td>
         <td>{{ program.date }}</td>
         <td>{{ program.time }}</td>
         <td class="text-right"><a class="btn btn-primary" href="{% url 'app:detail' program.id %}">Details</a></td>

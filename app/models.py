@@ -23,6 +23,22 @@ class Program(models.Model):
         else:
             return slots
 
+    @property
+    def slots_filled(self):
+        slots = self.registration_set.count()
+        if slots > self.capacity:
+            return self.capacity
+        else:
+            return slots
+
+    @property
+    def num_wait_list(self):
+        num = self.registration_set.count() - self.capacity
+        if num < 0:
+            return 0
+        else:
+            return num
+
     def __str__(self):
         return self.name
 
