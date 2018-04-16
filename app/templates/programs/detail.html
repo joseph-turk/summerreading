@@ -1,5 +1,14 @@
 {% extends 'shared/layout.html' %}
+{% load static %}
 {% block content %}
+
+{% if program.is_full %}
+<div class="card bg-warning mb-5">
+  <div class="card-body">
+    <h2 class="mb-0">This program is currently full. New registrations will be placed on the wait list.</h2>
+  </div>
+</div>
+{% endif %}
 
 <h2 class="display-4">{{ program.name }}</h2>
 
@@ -22,10 +31,10 @@
     <p>Slots Left: {{ program.slots_left }}</p>
 
     {% if request.path|slice:':5' == '/kids' %}
-    <a href="{% url 'app:grid_register_kids' %}" class="btn btn-primary">Register</a>
+    <a href="{% url 'app:grid_register_kids' %}" class="btn btn-primary">Back to Registration</a>
     {% endif %}
     {% if request.path|slice:':5' == '/teen' %}
-    <a href="{% url 'app:grid_register_teens' %}" class="btn btn-primary">Register</a>
+    <a href="{% url 'app:grid_register_teens' %}" class="btn btn-primary">Back to Registration</a>
     {% endif %}
   </div>
 </div>

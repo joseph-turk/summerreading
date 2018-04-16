@@ -109,8 +109,7 @@ def add_grid_registration(request):
     adult, created = Adult.objects.get_or_create(
         name=request.POST['adultname'],
         email=request.POST['adultemail'],
-        phone=request.POST['adultphone'],
-        notify=False
+        phone=request.POST['adultphone']
     )
 
     for key in request.POST:
@@ -132,6 +131,10 @@ def add_grid_registration(request):
                     is_wait_list=program.is_full
                 )
 
+                if program.registration_set.count() >= program.capacity:
+                    program.is_full = True
+                    program.save()
+
     return HttpResponseRedirect(reverse('app:grid_confirmation',
                                         args=[adult.id]))
 
@@ -145,8 +148,7 @@ def add_registration(request, program_id):
 
     adult, created = Adult.objects.get_or_create(
         name=request.POST['adultname'],
-        email=request.POST['adultemail'],
-        notify=False
+        email=request.POST['adultemail']
     )
 
     for key in request.POST:

@@ -1,3 +1,4 @@
+import uuid
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
@@ -22,11 +23,11 @@ urlpatterns = [
     path('teens/register/', views.grid_register_teens, name='grid_register_teens'),
     path('register/add_registration', views.add_grid_registration,
          name='add_grid_registration'),
-    path('register/confirmation/<int:pk>', views.grid_confirmation,
+    path('register/confirmation/<uuid:pk>', views.grid_confirmation,
          name='grid_confirmation'),
     # Admin-Only Views
     path('programs/', views.home, name='programs'),
     path('programs/<int:pk>', views.DetailView.as_view(), name='detail'),
     path('patrons/', views.patrons, name='patrons'),
-    path('patrons/<int:pk>', views.patron_detail, name='patron')
+    path('patrons/<uuid:pk>', views.patron_detail, name='patron')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,7 +6,9 @@
   <div class="card-body text-light">
     <h2 class="mb-4">Registration Confirmed</h2>
 
-    <p class="mb-0">Registration information is displayed below and has also been sent to the email address you provided.</p>
+    <p>Registration information is displayed below and has also been sent to the email address you provided.</p>
+
+    <p class="mb-0"><strong>Confirmation Number:</strong> {{ patron.id }}</p>
   </div>
 </div>
 
@@ -41,7 +43,12 @@
           {% for registration in child.registration_set.all %}
           <tr>
             <td>{{ child.name }}</td>
-            <td>{{ registration.program.name }}</td>
+            <td>
+              {{ registration.program.name }}
+              {% if registration.is_wait_list %}
+              <span class="text-danger">(Wait List)</span>
+              {% endif %}
+            </td>
             <td>{{ registration.program.date }}</td>
             <td>{{ registration.program.time }}</td>
           </tr>
