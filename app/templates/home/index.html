@@ -16,26 +16,35 @@
   </div>
 
   <div class="col-lg">
-    <div class="card h-100 py-5">
-      <div class="card-body">
+    <div class="card h-100">
+      <div class="card-body p-5">
         <h3 class="display-4">Kids</h3>
 
         <p>Click here for kids program signup and information.</p>
 
-        <a href="{% url 'app:kids_home' %}" class="btn btn-primary">Let's Go!</a>
       </div>
+      
+      <a href="{% url 'app:kids_home' %}" class="card-link">
+        <div class="card-footer bg-primary text-light">
+            Let's Go!
+        </div>
+      </a>
     </div>
   </div>
 
   <div class="col-lg">
-    <div class="card h-100 py-5">
-      <div class="card-body">
+    <div class="card h-100">
+      <div class="card-body p-5">
         <h3 class="display-4">Teens</h3>
 
         <p>Click here for teen program signup and information.</p>
-
-        <a href="{% url 'app:teens_home' %}" class="btn btn-primary">Let's Go!</a>
       </div>
+      
+      <a href="{% url 'app:teens_home' %}" class="card-link">
+        <div class="card-footer bg-primary text-light">
+          Let's Go!
+        </div>
+      </a>
     </div>
   </div>
 </div>

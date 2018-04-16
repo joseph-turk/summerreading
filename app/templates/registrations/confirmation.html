@@ -1,6 +1,55 @@
 {% extends 'shared/layout.html' %}
+{% load static %}
 {% block content %}
 
-<h2 class="display-4">Confirmed Registration</h2>
+<div class="card bg-primary mb-4">
+  <div class="card-body text-light">
+    <h2 class="mb-4">Registration Confirmed</h2>
+
+    <p class="mb-0">Registration information is displayed below and has also been sent to the email address you provided.</p>
+  </div>
+</div>
+
+<h2 class="display-4">{{ patron.name }}</h2>
+<hr>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h3>Your Information</h3>
+
+    <ul>
+      <li><strong>Email Address:</strong> {{ patron.email }}</li>
+      <li><strong>Phone Number:</strong> {{ patron.phone }}</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-8">
+    <h3>Registration Information</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Child Name</th>
+          <th>Program Name</th>
+          <th>Program Date</th>
+          <th>Program Time</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for child in patron.child_set.all %}
+          {% for registration in child.registration_set.all %}
+          <tr>
+            <td>{{ child.name }}</td>
+            <td>{{ registration.program.name }}</td>
+            <td>{{ registration.program.date }}</td>
+            <td>{{ registration.program.time }}</td>
+          </tr>
+          {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 {% endblock content %}

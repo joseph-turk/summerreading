@@ -29,6 +29,9 @@
               <a href="{% url 'app:teens_home' %}" class="nav-link">Teens</a>
             </li>
             {% if user.is_authenticated %}
+            <li class="nav-item {% if request.path|slice:':9' == '/programs' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'app:programs' %}">All Programs</a>
+            </li>
             <li class="nav-item {% if request.path|slice:':8' == '/patrons' %} active {% endif %}">
               <a class="nav-link" href="{% url 'app:patrons' %}">Patrons</a>
             </li>

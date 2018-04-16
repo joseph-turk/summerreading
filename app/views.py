@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -13,7 +14,7 @@ from .models import Registration
 
 def home(request):
     programs = get_list_or_404(Program)
-    return render(request, 'home/index.html', {'programs': programs})
+    return render(request, 'programs/index.html', {'programs': programs})
 
 
 class HomeView(generic.ListView):
@@ -131,7 +132,8 @@ def add_grid_registration(request):
                     is_wait_list=program.is_full
                 )
 
-    return HttpResponseRedirect(reverse('app:grid_confirmation'))
+    return HttpResponseRedirect(reverse('app:grid_confirmation',
+                                        args=[adult.id]))
 
 
 def add_registration(request, program_id):
@@ -177,25 +179,16 @@ class RegistrationCreate(generic.edit.CreateView):
     fields = ['program', 'child', 'is_wait_list']
 
 
-# class RegistrationGridCreate(generic.edit.CreateView):
-#     '''Multiple Program Registration'''
-#     model = Registration
-#     success_url = reverse_lazy('programs')
-#     fields = ['program', 'child', 'is_wait_list']
+@login_required(login_url='/admin/login/')
+def patrons(request):
+    patrons = get_list_or_404(Adult)
+    return render(request, 'patrons/index.html', {'patrons': patrons})
 
 
-class PatronsIndex(generic.ListView):
-    template_name = 'patrons/index.html'
-    context_object_name = 'patrons'
-
-    def get_queryset(self):
-        '''Return all patrons.'''
-        return Adult.objects.order_by('id')
-
-
-class PatronDetail(generic.DetailView):
-    model = Adult
-    template_name = 'patrons/detail.html'
+@login_required(login_url='/admin/login/')
+def patron_detail(request, pk):
+    patron = get_object_or_404(Adult, pk=pk)
+    return render(request, 'patrons/detail.html', {'patron': patron})
 
 
 def confirmed(request, program_id):
@@ -203,5 +196,6 @@ def confirmed(request, program_id):
     return render(request, 'programs/confirmation.html', {'program': program})
 
 
-def grid_confirmation(request):
-    return render(request, 'registrations/confirmation.html')
+def grid_confirmation(request, pk):
+    patron = get_object_or_404(Adult, pk=pk)
+    return render(request, 'registrations/confirmation.html', {'patron': patron})

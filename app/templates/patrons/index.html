@@ -1,15 +1,16 @@
 {% extends 'shared/layout.html' %}
 {% block content %}
 
-<h2 class="page-title">Patrons</h2>
+<h2 class="display-4">Patrons</h2>
 
-<table class="table table-bordered">
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
       <th>Children</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -26,6 +27,9 @@
               <div>{{ registration.program.name }}</div>
             {% endfor %}
           {% endfor %}
+        </td>
+        <td class="text-right">
+          <a class="btn btn-primary" href="{% url 'app:patron' patron.id %}">Details</a>
         </td>
       </tr>
       {% endfor %}

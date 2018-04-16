@@ -37,10 +37,10 @@
           <td>{{ program.date }}</td>
           <td>{{ program.time }}</td>
           {% if type == 'kids' %}
-          <td><a href="{% url 'app:kids_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
+          <td class="text-right"><a href="{% url 'app:kids_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
           {% endif %}
           {% if type == 'teens' %}
-          <td><a href="{% url 'app:teen_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
+          <td class="text-right"><a href="{% url 'app:teen_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
           {% endif %}
         </tr>
       {% endfor %}

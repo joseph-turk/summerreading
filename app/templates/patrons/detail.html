@@ -1,14 +1,41 @@
 {% extends 'shared/layout.html' %}
+{% load static %}
 {% block content %}
 
-<h2 class="display-4">{{ adult.name }}</h2>
+<h2 class="display-4 mb-4">{{ patron.name }}</h2>
+<hr>
 
-<h3>Children</h3>
+<div class="row">
+  <div class="col-lg">
+    <h3>Patron Information</h3>
 
-<ul>
-  {% for child in adult.child_set.all %}
-    <li>{{ child.name }}</li>
-  {% endfor %}
-</ul>
+    <ul>
+      <li>{{ patron.email }}</li>
+      <li>{{ patron.phone }}</li>
+    </ul>
+  </div>
+
+  <div class="col-lg">
+      <h3>Children Information</h3>
+
+      <ul>
+        {% for child in patron.child_set.all %}
+          <li>{{ child.name }}
+            <ul>
+              {% for registration in child.registration_set.all %}
+                <li>
+                  {{ registration.program.name }}
+                  {% if registration.is_wait_list %}
+                  (Wait List)
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+          
+        {% endfor %}
+      </ul>
+  </div>
+</div>
 
 {% endblock content %}

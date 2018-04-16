@@ -4,32 +4,32 @@
 
 {% comment %} <img src="{% static 'shared/graphics/libraries_rock.jpg' %}" alt="Libraries Rock Banner" class="mw-100"> {% endcomment %}
 
-<h2 class="display-4 text-center">Programs</h2>
+<h2 class="display-4">All Programs</h2>
 
-<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Capacity</th>
+      <th>Registered</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th></th>
+    </tr>
+  </thead>
 
-<div class="row">
-  {% for program in programs %}
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h3>{{ program.name }}</h3>
-  
-            <p class="program-description--list">{{ program.description|truncatechars:250 }}</p>
-  
-            <ul>
-              <li>Capacity: {{ program.capacity }}</li>
-              <li>Registered: {{ program.registration_set.count }}</li>
-              <li>Date: {{ program.date }}</li>
-              <li>Time: {{ program.time }}</li>
-            </ul>
-            
-            <a href="{% url 'app:register' program.id %}" class="btn btn-primary">Register</a>
-            <a href="{% url 'app:detail' program.id %}" class="btn btn-secondary">Details</a>
-          </div>
-        </div>
-    </div>
-  {% endfor %}
-</div>
+  <tbody>
+    {% for program in programs %}
+      <tr>
+        <td>{{ program.name }}</td>
+        <td>{{ program.capacity }}</td>
+        <td>{{ program.registration_set.count }}</td>
+        <td>{{ program.date }}</td>
+        <td>{{ program.time }}</td>
+        <td class="text-right"><a class="btn btn-primary" href="{% url 'app:detail' program.id %}">Details</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}
