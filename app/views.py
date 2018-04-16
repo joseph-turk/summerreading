@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponseRedirect
@@ -102,6 +103,13 @@ def add_registration(request):
                 if program.registration_set.count() >= program.capacity:
                     program.is_full = True
                     program.save()
+
+    send_mail(subject='Summer Reading Signup Confirmation',
+              message='If it works, this message was sent with the API, rather than just SMTP.',
+              from_email='joseph.turk.tcc@gmail.com',
+              recipient_list=['joseph.r.turk@gmail.com'],
+              html_message='<h1>Thank you!</h1>',
+              fail_silently=False)
 
     return HttpResponseRedirect(reverse('app:confirmation',
                                         args=[adult.id]))

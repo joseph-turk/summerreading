@@ -125,3 +125,9 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = 'app/media/'
 MEDIA_URL = '/media/'
+
+
+# Email Configuration
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
