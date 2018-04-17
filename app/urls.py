@@ -11,19 +11,15 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('kids/', views.register_kids, name='kids_home'),
     path('teens/', views.register_teens, name='teens_home'),
+
     # Program Views
-    path('kids/programs/',
-         views.KidProgramsIndex.as_view(),
-         name='kid_programs'),
-    path('teens/programs/',
-         views.TeenProgramsIndex.as_view(),
-         name='teen_programs'),
     path('kids/programs/<int:pk>',
          views.ProgramDetail.as_view(),
          name="kids_program_detail"),
     path('teens/programs/<int:pk>',
          views.ProgramDetail.as_view(),
          name='teen_program_detail'),
+
     # Registration Views
     path('register/add_registration',
          views.add_registration,
@@ -31,6 +27,7 @@ urlpatterns = [
     path('register/confirmation/<uuid:pk>',
          views.confirmation,
          name='confirmation'),
+
     # Admin-Only Views
     path('programs/', views.ProgramList.as_view(), name='programs'),
     path('programs/<int:pk>', views.ProgramDetail.as_view(), name='detail'),

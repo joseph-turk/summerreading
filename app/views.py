@@ -15,13 +15,13 @@ from .models import Child
 from .models import Registration
 
 
-# GET: /
 def home(request):
+    '''App home page'''
     return render(request, 'home/index.html')
 
 
-# GET: /programs
 class ProgramList(generic.ListView):
+    '''Shows a list of all programs'''
     template_name = 'programs/index.html'
     context_object_name = 'programs'
 
@@ -29,30 +29,14 @@ class ProgramList(generic.ListView):
         return Program.objects.order_by('date')
 
 
-class KidProgramsIndex(generic.ListView):
-    template_name = 'programs/index.html'
-    context_object_name = 'programs'
-
-    def get_queryset(self):
-        '''Return all kids programs.'''
-        return Program.objects.exclude(is_teen=True).order_by('date')
-
-
-class TeenProgramsIndex(generic.ListView):
-    template_name = 'programs/index.html'
-    context_object_name = 'programs'
-
-    def get_queryset(self):
-        '''Return all teen programs.'''
-        return Program.objects.exclude(is_teen=False).order_by('date')
-
-
 class ProgramDetail(generic.DetailView):
+    '''Shows details for a single program'''
     model = Program
     template_name = 'programs/detail.html'
 
 
 def register_kids(request):
+    '''Shows registration screen for kids'''
     programs = get_list_or_404(Program.objects.order_by(
         'date'), is_teen=False, date__gt=datetime.today())
     return render(request,
@@ -64,6 +48,7 @@ def register_kids(request):
 
 
 def register_teens(request):
+    '''Shows registration screen for teens'''
     programs = get_list_or_404(
         Program, is_teen=True, date__gt=datetime.today())
     return render(request,
@@ -75,19 +60,25 @@ def register_teens(request):
 
 
 def add_registration(request):
+    '''Handles registration form submission'''
+
+    # Initialize list of programs to register for
     programs = []
 
+    # Get or create Adult record
     adult, created = Adult.objects.get_or_create(
         name=request.POST['adultname'],
         email=request.POST['adultemail'],
         phone=request.POST['adultphone']
     )
 
+    # Add selected programs to list
     for key in request.POST:
         if key.startswith('program-'):
             program = get_object_or_404(Program, pk=key[8:])
             programs.append(program)
 
+    # Iterate over children from form
     for key in request.POST:
         if key.startswith('childname'):
             child, created = Child.objects.get_or_create(
@@ -95,6 +86,7 @@ def add_registration(request):
                 adult=adult
             )
 
+            # Register child for program
             for program in programs:
                 registration, created = Registration.objects.get_or_create(
                     program=program,
@@ -102,6 +94,7 @@ def add_registration(request):
                     is_wait_list=program.is_full
                 )
 
+                # Update program wait list status if applicable
                 if program.registration_set.count() >= program.capacity:
                     program.is_full = True
                     program.save()
@@ -114,6 +107,7 @@ def add_registration(request):
     email_txt = get_template('registrations/confirmation_email.txt')
     txt_content = email_txt.render({'patron': adult})
 
+    # Send email
     send_mail(subject='Summer Reading Signup Confirmation',
               message=txt_content,
               from_email='efpl@test.com',
@@ -125,18 +119,21 @@ def add_registration(request):
                                         args=[adult.id]))
 
 
+def confirmation(request, pk):
+    '''Shows confirmation information after registration'''
+    patron = get_object_or_404(Adult, pk=pk)
+    return render(request, 'registrations/confirmation.html', {'patron': patron})
+
+
 @login_required(login_url='/admin/login/')
 def patrons(request):
+    '''Shows a list of patrons'''
     patrons = get_list_or_404(Adult)
     return render(request, 'patrons/index.html', {'patrons': patrons})
 
 
 @login_required(login_url='/admin/login/')
 def patron_detail(request, pk):
+    '''Shows details about a single patron'''
     patron = get_object_or_404(Adult, pk=pk)
     return render(request, 'patrons/detail.html', {'patron': patron})
-
-
-def confirmation(request, pk):
-    patron = get_object_or_404(Adult, pk=pk)
-    return render(request, 'registrations/confirmation.html', {'patron': patron})
