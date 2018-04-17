@@ -10,7 +10,7 @@
 
     <p>Your registration information is displayed below and has also been sent to the email address you provided.</p>
 
-    <p class="mb-0"><strong>Confirmation Number:</strong> {{ patron.id }}</p>
+    <p class="mb-0"><strong>Confirmation Number:</strong> {{ patron.confirmation_number }}</p>
   </div>
 </div>
 
@@ -63,6 +63,6 @@
 
 <hr>
 
-<p>If any of the above information is incorrect, please send an email to <a href="mailto:#">summer-reading@efpl.com</a> and include confirmation number {{ patron.id }}.</p>
+<p>If any of the above information is incorrect, please send an email to <a href="mailto:#">summer.reading@efpl.com</a> and include confirmation number {{ patron.confirmation_number }}.</p>
 
 {% endblock content %}

@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.core.validators import RegexValidator
 from datetime import date
+from time import time
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -48,6 +49,10 @@ class Adult(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=12)
+
+    @property
+    def confirmation_number(self):
+        return str(self.id)[:8]
 
     def __str__(self):
         return self.name

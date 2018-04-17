@@ -6,6 +6,8 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
+from django.template.loader import get_template
+from django.template import Context
 
 from .models import Program
 from .models import Adult
@@ -104,11 +106,15 @@ def add_registration(request):
                     program.is_full = True
                     program.save()
 
+    # Create HTML Template for Email
+    email_html = get_template('registrations/confirmation_email.html')
+    html_content = email_html.render({'patron': adult})
+
     send_mail(subject='Summer Reading Signup Confirmation',
               message='If it works, this message was sent with the API, rather than just SMTP.',
-              from_email='joseph.turk.tcc@gmail.com',
-              recipient_list=['joseph.r.turk@gmail.com'],
-              html_message='<h1>Thank you!</h1>',
+              from_email='efpl@test.com',
+              recipient_list=[adult.email],
+              html_message=html_content,
               fail_silently=False)
 
     return HttpResponseRedirect(reverse('app:confirmation',
