@@ -110,8 +110,12 @@ def add_registration(request):
     email_html = get_template('registrations/confirmation_email.html')
     html_content = email_html.render({'patron': adult})
 
+    # Create Plain Text Template for Email
+    email_txt = get_template('registrations/confirmation_email.txt')
+    txt_content = email_txt.render({'patron': adult})
+
     send_mail(subject='Summer Reading Signup Confirmation',
-              message='If it works, this message was sent with the API, rather than just SMTP.',
+              message=txt_content,
               from_email='efpl@test.com',
               recipient_list=[adult.email],
               html_message=html_content,
