@@ -6,21 +6,19 @@ Confirmation Number: {{ patron.confirmation_number }}
 
 ------------------------------------
 
-Your Information
+Parent or Guardian Information
+
 Name: {{ patron.name }}
+
 Email Address: {{ patron.email }}
+
 Phone Number: {{ patron.phone }}
+
+Photo Release Consent: {{ patron.photo_release|yesno:"Yes,No" }}
 
 ------------------------------------
 
 Registration Information
-
-Child Name: 
-Program Name
-Program Date
-Program Time
-
-------------------------------------
 
 {% for child in patron.child_set.all %} {% for registration in child.registration_set.all %}
 Child Name: {{ child.name }}

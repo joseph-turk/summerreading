@@ -21,6 +21,10 @@
         <th style="text-align:right; border:1px solid #dee2e6; padding:10px">Phone Number:</th>
         <td style="border:1px solid #dee2e6; padding:10px">{{ patron.phone }}</td>
       </tr>
+      <tr>
+        <th style="text-align:right; border:1px solid #dee2e6; padding:10px">Photo Release Consent:</th>
+        <td style="border:1px solid #dee2e6; padding:10px">{{ patron.photo_release|yesno:"Yes,No" }}</td>
+      </tr>
     </tbody>
   </table>
 

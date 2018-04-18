@@ -69,7 +69,8 @@ def add_registration(request):
     adult, created = Adult.objects.get_or_create(
         name=request.POST['adultname'],
         email=request.POST['adultemail'],
-        phone=request.POST['adultphone']
+        phone=request.POST['adultphone'],
+        photo_release=request.POST['adultphotorelease']
     )
 
     # Add selected programs to list

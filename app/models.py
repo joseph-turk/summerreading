@@ -49,6 +49,7 @@ class Adult(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=12)
+    photo_release = models.BooleanField()
 
     @property
     def confirmation_number(self):
@@ -72,4 +73,4 @@ class Registration(models.Model):
     is_wait_list = models.BooleanField(default=False)
 
     def __str__(self):
-        return {self.program} + ' Registration for ' + self.child
+        return self.program.name + ' Registration for ' + self.child.name

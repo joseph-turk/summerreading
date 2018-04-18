@@ -9,6 +9,12 @@
   Programs
 </h1>
 
+{% if type == 'kids' %}
+<p class="h4 font-weight-normal mb-4">These programs are intended for kids. Ages here.</p>
+{% elif type == 'teens' %}
+<p class="h4 font-weight-normal mb-4">These programs are intended for teens. Ages here.</p>
+{% endif %}
+
 <h2 class="display-4">Select Programs</h2>
 
 <form action="{% url 'app:add_registration' %}" method="post">
@@ -43,8 +49,7 @@
           <td>{{ program.time }}</td>
           {% if type == 'kids' %}
           <td class="text-right"><a href="{% url 'app:kids_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
-          {% endif %}
-          {% if type == 'teens' %}
+          {% elif type == 'teens' %}
           <td class="text-right"><a href="{% url 'app:teen_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
           {% endif %}
         </tr>
@@ -58,35 +63,59 @@
 
   <div class="row">
       <div class="col-lg">
-        <h3>Your Information</h3>
+        <h3>Parent or Guardian Information</h3>
 
         <div class="form-group">
-          <label for="adultname">Your Name</label>
+          <label for="adultname">Parent or Guardian Name (First and Last)</label>
           <input type="text" id="adultname" name="adultname" class="form-control" required>
         </div>
 
         <div class="form-group">
-          <label for="adultemail">Your Email Address</label>
+          <label for="adultemail">Email Address</label>
           <input type="email" id="adultemail" name="adultemail" class="form-control" required>
         </div>
 
         <div class="form-group">
-          <label for="adultphone">Your Phone Number</label>
+          <label for="adultphone">Phone Number</label>
           <input type="phone" id="adultphone" name="adultphone" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label>I consent to photo release for the registered children.</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="adultphotorelease" id="consentyes" value="1">
+            <label class="form-check-label" for="consentyes">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="adultphotorelease" id="consentno" value="0">
+            <label class="form-check-label" for="consentno">
+              No
+            </label>
+          </div>
         </div>
       </div>
 
       <div class="col-lg">
         <div id="children">
+          {% if type == 'kids' %}
           <h3>Children to Register</h3>
+          {% elif type == 'teens' %}
+          <h3>Teens to Register</h3>
+          {% endif %}
 
           <div class="form-group">
-            <label for="childname1">Child's name</label>
+            <label for="childname1">Name (First and Last)</label>
             <input type="text" id="childname1" name="childname1" class="form-control" required>
           </div>
         </div>
 
+        {% if type == 'kids' %}
         <button id="addChild" class="btn btn-sm btn-primary" type="button">Add Another Child</button>
+        {% elif type == 'teens' %}
+        <button id="addChild" class="btn btn-sm btn-primary" type="button">Add Another Teen</button>
+        {% endif %}
       </div>
     </div>
 

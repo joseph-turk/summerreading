@@ -8,7 +8,7 @@ function addChild () {
     // Create elements for form group
     let newChildDiv = document.createElement('div')
     let newChildLabel = document.createElement('label')
-    let labelContent = document.createTextNode('Child\'s Name')
+    let labelContent = document.createTextNode('Name (First and Last)')
     let newChildInput = document.createElement('input')
 
     // Set attributes on new elements

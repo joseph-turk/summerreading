@@ -14,16 +14,21 @@
   </div>
 </div>
 
+<h3>Location Information</h3>
+
+<p>Youth center info here.</p>
+
 <hr>
 
 <div class="row">
   <div class="col-lg-4">
-    <h3>Your Information</h3>
+    <h3>Parent or Guardian Information</h3>
 
     <ul>
       <li><strong>Name:</strong> {{ patron.name }}</li>
       <li><strong>Email Address:</strong> {{ patron.email }}</li>
       <li><strong>Phone Number:</strong> {{ patron.phone }}</li>
+      <li><strong>Photo Release Consent:</strong> {{ patron.photo_release|yesno:"Yes,No" }}</li>
     </ul>
   </div>
 
@@ -33,7 +38,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Child Name</th>
+          <th>Name</th>
           <th>Program Name</th>
           <th>Program Date</th>
           <th>Program Time</th>
@@ -63,6 +68,6 @@
 
 <hr>
 
-<p>If any of the above information is incorrect, please send an email to <a href="mailto:#">summer.reading@efpl.com</a> and include confirmation number {{ patron.confirmation_number }}.</p>
+<p>If you have questions, need to cancel, or any of the above information is incorrect, please send an email to <a href="mailto:#">summer.reading@efpl.com</a> or call 608-882-2260. Please include your name and confirmation number {{ patron.confirmation_number }}.</p>
 
 {% endblock content %}
