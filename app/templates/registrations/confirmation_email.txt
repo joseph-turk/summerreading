@@ -6,6 +6,16 @@ Confirmation Number: {{ patron.confirmation_number }}
 
 ------------------------------------
 
+Location Information
+
+Due to the Library Expansion Project construction, these events will take place at the Evansville Youth Center.
+
+Address: 209 S 1st St, Evansville, WI 53536
+
+Phone Number: 608-882-0372
+
+------------------------------------
+
 Parent or Guardian Information
 
 Name: {{ patron.name }}
