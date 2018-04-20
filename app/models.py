@@ -17,6 +17,10 @@ class Program(models.Model):
     is_full = models.BooleanField()
 
     @property
+    def is_past(self):
+        return self.date < date.today()
+
+    @property
     def slots_left(self):
         slots = self.capacity - self.registration_set.count()
         if slots < 0:

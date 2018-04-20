@@ -29,8 +29,9 @@ urlpatterns = [
          name='confirmation'),
 
     # Admin-Only Views
-    path('programs/', views.ProgramList.as_view(), name='programs'),
+    path('programs/', views.programs, name='programs'),
     path('programs/<int:pk>', views.ProgramDetail.as_view(), name='detail'),
+    path('programs/<int:pk>/print', views.program_print, name='print'),
     path('patrons/', views.patrons, name='patrons'),
     path('patrons/<uuid:pk>', views.patron_detail, name='patron')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

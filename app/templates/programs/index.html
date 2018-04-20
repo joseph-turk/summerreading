@@ -15,6 +15,7 @@
       <th>Date</th>
       <th>Time</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -22,7 +23,9 @@
     {% for program in programs %}
       <tr>
         <td>
-          {% if program.is_full %}
+          {% if program.is_past %}
+          <div class="status-past"></div>
+          {% elif program.is_full %}
           <div class="status-full"></div>
           {% else %}
           <div class="status-open"></div>
@@ -35,6 +38,7 @@
         <td>{{ program.date }}</td>
         <td>{{ program.time }}</td>
         <td class="text-right"><a class="btn btn-primary" href="{% url 'app:detail' program.id %}">Details</a></td>
+        <td class="text-right"><a class="btn btn-primary" href="{% url 'app:print' program.id %}">Print</a></td>
       </tr>
     {% endfor %}
   </tbody>

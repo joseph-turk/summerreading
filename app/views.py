@@ -127,6 +127,13 @@ def confirmation(request, pk):
 
 
 @login_required(login_url='/admin/login/')
+def programs(request):
+    '''Shows a list of programs'''
+    programs = get_list_or_404(Program.objects.order_by('date'))
+    return render(request, 'programs/index.html', {'programs': programs})
+
+
+@login_required(login_url='/admin/login/')
 def patrons(request):
     '''Shows a list of patrons'''
     patrons = get_list_or_404(Adult)
@@ -138,3 +145,10 @@ def patron_detail(request, pk):
     '''Shows details about a single patron'''
     patron = get_object_or_404(Adult, pk=pk)
     return render(request, 'patrons/detail.html', {'patron': patron})
+
+
+@login_required(login_url='/admin/login/')
+def program_print(request, pk):
+    '''Shows print view for a single program'''
+    program = get_object_or_404(Program, pk=pk)
+    return render(request, 'programs/print.html', {'program': program})

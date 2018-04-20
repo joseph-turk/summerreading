@@ -8152,3 +8152,10 @@ img.program-graphic {
   height: 1rem;
   width: 1rem;
 }
+
+.status-past {
+  background-color: #666;
+  border-radius: 50%;
+  height: 1rem;
+  width: 1rem;
+}

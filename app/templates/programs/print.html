@@ -1,0 +1,78 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="display-4">{{ program.name }}</h2>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <h3>Program Name</h3>
+    <p>{{ program.name }}</p>
+
+    <h3>Date and Time</h3>
+    <p>{{ program.date }} at {{ program.time }}</p>
+  </div>
+  
+  <div class="col">
+    <h3>Program Description</h3>
+    <p>{{ program.description }}</p>
+  </div>
+</div>
+
+<h2 class="display-4 mt-4">Participant List</h2>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <h3>Registered for This Program</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Parent or Guardian</th>
+          <th>Phone Number</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for registration in program.registration_set.all %} {% if not registration.is_wait_list %}
+        <tr>
+          <td>{{ registration.child }}</td>
+          <td>{{ registration.child.adult.name }}</td>
+          <td>{{ registration.child.adult.phone }}</td>
+        </tr>
+        {% endif %} {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <h3>Wait List for This Program</h3>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Parent or Guardian</th>
+            <th>Phone Number</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          {% for registration in program.registration_set.all %} {% if registration.is_wait_list %}
+          <tr>
+            <td>{{ registration.child }}</td>
+            <td>{{ registration.child.adult.name }}</td>
+            <td>{{ registration.child.adult.phone }}</td>
+          </tr>
+          {% endif %} {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+
+{% endblock content %}
