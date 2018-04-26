@@ -16,7 +16,7 @@
   Register for
   {% if type == 'kids' %} Kids {% endif %}
   {% if type == 'teens' %} Teen {% endif %}
-  Programs
+  Events
 </h1>
 
 <div class="card bg-info text-light mb-5">
@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<h2 class="display-4">Select Programs</h2>
+<h2 class="display-4">Select Events</h2>
 
 <form action="{% url 'app:add_registration' %}" method="post">
   {% csrf_token %}

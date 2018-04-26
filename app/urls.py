@@ -13,10 +13,10 @@ urlpatterns = [
     path('teens/', views.register_teens, name='teens_home'),
 
     # Program Views
-    path('kids/programs/<int:pk>',
+    path('kids/events/<int:pk>',
          views.ProgramDetail.as_view(),
          name="kids_program_detail"),
-    path('teens/programs/<int:pk>',
+    path('teens/events/<int:pk>',
          views.ProgramDetail.as_view(),
          name='teen_program_detail'),
 
@@ -29,9 +29,9 @@ urlpatterns = [
          name='confirmation'),
 
     # Admin-Only Views
-    path('programs/', views.programs, name='programs'),
-    path('programs/<int:pk>', views.ProgramDetail.as_view(), name='detail'),
-    path('programs/<int:pk>/print', views.program_print, name='print'),
+    path('events/', views.programs, name='programs'),
+    path('events/<int:pk>', views.ProgramDetail.as_view(), name='detail'),
+    path('events/<int:pk>/print', views.program_print, name='print'),
     path('patrons/', views.patrons, name='patrons'),
     path('patrons/<uuid:pk>', views.patron_detail, name='patron')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

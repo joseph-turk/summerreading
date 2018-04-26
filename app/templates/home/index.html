@@ -4,46 +4,35 @@
 
 <div class="row mt-5">
   <div class="col-12 mb-4">
-    <div class="card bg-primary text-white">
-      <div class="card-body">
-        <p class="h3 m-3 text-center">Welcome to Summer Reading Signup for Eager Free Public Library</p>
+    <h2 class="display-3 mb-5 text-center">Eager Free Public Library<br><small>Summer Event Signup</small></h2>
 
-        <p class="h5 m-3 text-center">Select an area below to view program information.</p>
-      </div>
-    </div>
+    <p class="h3 my-3 text-center">Select an area below.</p>
+    <hr>
   </div>
 
   <div class="col-lg">
-    <div class="card h-100">
-      <div class="card-body p-5">
-        <h3 class="display-4">Kids</h3>
+    <a href="{% url 'app:kids_home' %}" class="card-link">
+      <div class="card bg-primary text-light text-center h-100">
+        <div class="card-body p-5">
+          <h3 class="display-4">Kids</h3>
 
-        <p>Click here for kids program signup and information.</p>
+          <p>Click here for kids event signup and information.</p>
 
-      </div>
-      
-      <a href="{% url 'app:kids_home' %}" class="card-link">
-        <div class="card-footer bg-primary text-light">
-            Let's Go!
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
   </div>
 
   <div class="col-lg">
-    <div class="card h-100">
-      <div class="card-body p-5">
-        <h3 class="display-4">Teens</h3>
+    <a href="{% url 'app:teens_home' %}" class="card-link">
+      <div class="card bg-primary text-light text-center h-100">
+        <div class="card-body p-5">
+          <h3 class="display-4">Teens</h3>
 
-        <p>Click here for teen program signup and information.</p>
-      </div>
-      
-      <a href="{% url 'app:teens_home' %}" class="card-link">
-        <div class="card-footer bg-primary text-light">
-          Let's Go!
+          <p>Click here for teen event signup and information.</p>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
   </div>
 </div>
 
