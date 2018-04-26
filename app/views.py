@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -13,6 +13,10 @@ from .models import Program
 from .models import Adult
 from .models import Child
 from .models import Registration
+
+
+# Dates for program registrations
+reg_open = datetime(2018, 4, 27, 9)
 
 
 def home(request):
@@ -39,11 +43,17 @@ def register_kids(request):
     '''Shows registration screen for kids'''
     programs = get_list_or_404(Program.objects.order_by(
         'date'), is_teen=False, date__gt=datetime.today())
+
+    is_open = False
+    if datetime.now() > reg_open:
+        is_open = True
+
     return render(request,
                   'registrations/create.html',
                   {
                       'programs': programs,
-                      'type': 'kids'
+                      'type': 'kids',
+                      'is_open': is_open
                   })
 
 
@@ -51,73 +61,90 @@ def register_teens(request):
     '''Shows registration screen for teens'''
     programs = get_list_or_404(
         Program, is_teen=True, date__gt=datetime.today())
+
+    is_open = False
+    if datetime.now() > reg_open:
+        is_open = True
+
     return render(request,
                   'registrations/create.html',
                   {
                       'programs': programs,
-                      'type': 'teens'
+                      'type': 'teens',
+                      'is_open': is_open
                   })
 
 
 def add_registration(request):
     '''Handles registration form submission'''
 
-    # Initialize list of programs to register for
-    programs = []
+    # Check if registrations are open yet
+    if datetime.now() < reg_open:
+        if request.POST['registrationtype'] == 'kids':
+            programs = get_list_or_404(
+                Program, is_teen=False, date__gt=datetime.today())
+            return redirect('app:kids_home')
+        else:
+            programs = get_list_or_404(
+                Program, is_teen=True, date__gt=datetime.today())
+            return redirect('app:teens_home')
+    else:
+        # Initialize list of programs to register for
+        programs = []
 
-    # Get or create Adult record
-    adult, created = Adult.objects.get_or_create(
-        name=request.POST['adultname'],
-        email=request.POST['adultemail'],
-        phone=request.POST['adultphone'],
-        photo_release=request.POST['adultphotorelease']
-    )
+        # Get or create Adult record
+        adult, created = Adult.objects.get_or_create(
+            name=request.POST['adultname'],
+            email=request.POST['adultemail'],
+            phone=request.POST['adultphone'],
+            photo_release=request.POST['adultphotorelease']
+        )
 
-    # Add selected programs to list
-    for key in request.POST:
-        if key.startswith('program-'):
-            program = get_object_or_404(Program, pk=key[8:])
-            programs.append(program)
+        # Add selected programs to list
+        for key in request.POST:
+            if key.startswith('program-'):
+                program = get_object_or_404(Program, pk=key[8:])
+                programs.append(program)
 
-    # Iterate over children from form
-    for key in request.POST:
-        if key.startswith('childname'):
-            child, created = Child.objects.get_or_create(
-                name=request.POST[key],
-                adult=adult
-            )
-
-            # Register child for program
-            for program in programs:
-                registration, created = Registration.objects.get_or_create(
-                    program=program,
-                    child=child,
-                    is_wait_list=program.is_full
+        # Iterate over children from form
+        for key in request.POST:
+            if key.startswith('childname'):
+                child, created = Child.objects.get_or_create(
+                    name=request.POST[key],
+                    adult=adult
                 )
 
-                # Update program wait list status if applicable
-                if program.registration_set.count() >= program.capacity:
-                    program.is_full = True
-                    program.save()
+                # Register child for program
+                for program in programs:
+                    registration, created = Registration.objects.get_or_create(
+                        program=program,
+                        child=child,
+                        is_wait_list=program.is_full
+                    )
 
-    # Create HTML Template for Email
-    email_html = get_template('registrations/confirmation_email.html')
-    html_content = email_html.render({'patron': adult})
+                    # Update program wait list status if applicable
+                    if program.registration_set.count() >= program.capacity:
+                        program.is_full = True
+                        program.save()
 
-    # Create Plain Text Template for Email
-    email_txt = get_template('registrations/confirmation_email.txt')
-    txt_content = email_txt.render({'patron': adult})
+        # Create HTML Template for Email
+        email_html = get_template('registrations/confirmation_email.html')
+        html_content = email_html.render({'patron': adult})
 
-    # Send email
-    send_mail(subject='Summer Reading Signup Confirmation',
-              message=txt_content,
-              from_email='efpl@test.com',
-              recipient_list=[adult.email],
-              html_message=html_content,
-              fail_silently=False)
+        # Create Plain Text Template for Email
+        email_txt = get_template('registrations/confirmation_email.txt')
+        txt_content = email_txt.render({'patron': adult})
 
-    return HttpResponseRedirect(reverse('app:confirmation',
-                                        args=[adult.id]))
+        # Send email
+        send_mail(subject='Summer Reading Signup Confirmation',
+                  message=txt_content,
+                  from_email='efpl@test.com',
+                  recipient_list=[adult.email],
+                  html_message=html_content,
+                  fail_silently=False)
+
+        return HttpResponseRedirect(reverse('app:confirmation',
+                                            args=[adult.id]))
 
 
 def confirmation(request, pk):

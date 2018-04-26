@@ -2,6 +2,16 @@
 {% block content %}
 {% load static %}
 
+{% if not is_open %}
+  <div class="card bg-warning mb-3">
+    <div class="card-body">
+      <h3>Registrations Are Not Open Yet</h3>
+
+      <p class="mb-0">Program registration will open on DATE at TIME. Program details and the registration form are included below for reference.</p>
+    </div>
+  </div>
+{% endif %}
+
 <h1 class="display-3 mb-3">
   Register for
   {% if type == 'kids' %} Kids {% endif %}
@@ -24,6 +34,8 @@
 <form action="{% url 'app:add_registration' %}" method="post">
   {% csrf_token %}
 
+  <input type="hidden" name="registrationtype" value="{{ type }}">
+
   <table class="table">
     <thead>
       <tr>
@@ -40,7 +52,7 @@
     <tbody>
       {% for program in programs %}
         <tr>
-          <td><input type="checkbox" name="program-{{ program.id }}" id="program-{{ program.id }}"></td>
+          <td><input type="checkbox" name="program-{{ program.id }}" id="program-{{ program.id }}" {% if not is_open %} disabled {% endif %}></td>
           <td><label for="program-{{ program.id }}">
             {{ program.name }}
             {% if program.is_full %}
@@ -64,36 +76,36 @@
   <h2 class="display-4 mt-5">Register</h2>
 
   <hr>
-
+  
   <div class="row">
       <div class="col-lg">
         <h3>Parent or Guardian Information</h3>
 
         <div class="form-group">
           <label for="adultname">Parent or Guardian Name (First and Last)</label>
-          <input type="text" id="adultname" name="adultname" class="form-control" required>
+          <input type="text" id="adultname" name="adultname" class="form-control" required {% if not is_open %} disabled {% endif %}>
         </div>
 
         <div class="form-group">
           <label for="adultemail">Email Address</label>
-          <input type="email" id="adultemail" name="adultemail" class="form-control" required>
+          <input type="email" id="adultemail" name="adultemail" class="form-control" required {% if not is_open %} disabled {% endif %}>
         </div>
 
         <div class="form-group">
           <label for="adultphone">Phone Number</label>
-          <input type="phone" id="adultphone" name="adultphone" class="form-control" required>
+          <input type="phone" id="adultphone" name="adultphone" class="form-control" required {% if not is_open %} disabled {% endif %}>
         </div>
 
         <div class="form-group">
           <label>Can we take and use photographs of your child(ren) at library events?</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="adultphotorelease" id="consentyes" value="1">
+            <input class="form-check-input" type="radio" name="adultphotorelease" id="consentyes" value="1" {% if not is_open %} disabled {% endif %}>
             <label class="form-check-label d-flex justify-content-between" for="consentyes">
               <strong class="mr-2">Yes:</strong> <span>I hereby consent to the use of any photographs, video or audio clips of my child in news coverage or publicity for the Eager Free Public Library. This may include use in our newsletters, brochures, fliers, posters, and/or web pages.</span>
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="adultphotorelease" id="consentno" value="0">
+            <input class="form-check-input" type="radio" name="adultphotorelease" id="consentno" value="0" {% if not is_open %} disabled {% endif %}>
             <label class="form-check-label d-flex justify-content-between" for="consentno">
               <strong class="mr-2">No:</strong> <span>I do not consent to the use of photographs, video or audio clips of my child(ren).</span>
             </label>
@@ -111,21 +123,20 @@
 
           <div class="form-group">
             <label for="childname1">Name (First and Last)</label>
-            <input type="text" id="childname1" name="childname1" class="form-control" required>
+            <input type="text" id="childname1" name="childname1" class="form-control" required {% if not is_open %} disabled {% endif %}>
           </div>
         </div>
 
         {% if type == 'kids' %}
-        <button id="addChild" class="btn btn-sm btn-primary" type="button">Add Another Child</button>
+        <button id="addChild" class="btn btn-sm btn-primary" type="button" {% if not is_open %} disabled {% endif %}>Add Another Child</button>
         {% elif type == 'teens' %}
-        <button id="addChild" class="btn btn-sm btn-primary" type="button">Add Another Teen</button>
+        <button id="addChild" class="btn btn-sm btn-primary" type="button" {% if not is_open %} disabled {% endif %}>Add Another Teen</button>
         {% endif %}
       </div>
     </div>
 
     <div class="mt-4">
-      <button class="btn btn-primary">Register</button>
-      <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
+      <button class="btn btn-primary" {% if not is_open %} disabled {% endif %}>Register</button>
     </div>
 </form>
 
