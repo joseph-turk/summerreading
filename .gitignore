@@ -92,3 +92,4 @@ db.sqlite3
 node_modules/
 sendgrid.env
 /static/
+app/media/graphics/
