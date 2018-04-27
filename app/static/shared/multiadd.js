@@ -5,7 +5,7 @@ function addChild () {
     // Prevent adding another child if blank input is available
     lastChild.focus()
   } else {
-    // Create elements for form group
+    // Create elements for name form group
     let newChildDiv = document.createElement('div')
     let newChildLabel = document.createElement('label')
     let labelContent = document.createTextNode('Name (First and Last)')
@@ -29,6 +29,69 @@ function addChild () {
 
     // Set focus in new input
     newChildInput.focus()
+
+    // Create elements for photo consent
+    let photoConsentDiv = document.createElement('div')
+    let photoConsentYesDiv = document.createElement('div')
+    let photoConsentNoDiv = document.createElement('div')
+    let photoConsentLabel = document.createElement('label')
+    let photoConsentYesLabel = document.createElement('label')
+    let photoConsentNoLabel = document.createElement('label')
+    let photoConsentLabelContent = document.createTextNode('Can we take and use photographs of this child at library events?')
+    let photoConsentYesLabelContentStrong = document.createElement('strong')
+    let photoConsentYesLabelDetailsSpan = document.createElement('span')
+    let photoConsentYesLabelContent = document.createTextNode('Yes:')
+    let photoConsentYesLabelDetails = document.createTextNode('I hereby consent to the use of any photographs, video or audio clips of this child in news coverage or publicity for the Eager Free Public Library. This may include use in our newsletters, brochures, fliers, posters, and/or web pages.')
+    let photoConsentNoLabelContentStrong = document.createElement('strong')
+    let photoConsentNoLabelDetailsSpan = document.createElement('span')
+    let photoConsentNoLabelContent = document.createTextNode('No:')
+    let photoConsentNoLabelDetails = document.createTextNode('I do not consent to the use of photographs, video or audio clips of this child.')
+    let photoConsentYesInput = document.createElement('input')
+    let photoConsentNoInput = document.createElement('input')
+
+    // Set attributes for photo consent
+    photoConsentDiv.setAttribute('class', 'form-group')
+    photoConsentYesDiv.setAttribute('class', 'form-check')
+    photoConsentNoDiv.setAttribute('class', 'form-check')
+    photoConsentYesLabel.setAttribute('for', `consentyes${nextChild}`)
+    photoConsentNoLabel.setAttribute('for', `consentno${nextChild}`)
+    photoConsentYesLabel.setAttribute('class', 'form-check-label d-flex justify-content-between')
+    photoConsentNoLabel.setAttribute('class', 'form-check-label d-flex justify-content-between')
+    photoConsentLabel.appendChild(photoConsentLabelContent)
+    photoConsentYesLabelContentStrong.setAttribute('class', 'mr-2')
+    photoConsentNoLabelContentStrong.setAttribute('class', 'mr-2')
+    photoConsentYesLabelContentStrong.appendChild(photoConsentYesLabelContent)
+    photoConsentYesLabelDetailsSpan.appendChild(photoConsentYesLabelDetails)
+    photoConsentYesLabel.appendChild(photoConsentYesLabelContentStrong)
+    photoConsentYesLabel.appendChild(photoConsentYesLabelDetailsSpan)
+    photoConsentNoLabelContentStrong.appendChild(photoConsentNoLabelContent)
+    photoConsentNoLabelDetailsSpan.appendChild(photoConsentNoLabelDetails)
+    photoConsentNoLabel.appendChild(photoConsentNoLabelContentStrong)
+    photoConsentNoLabel.appendChild(photoConsentNoLabelDetailsSpan)
+    photoConsentYesInput.setAttribute('class', 'form-check-input')
+    photoConsentYesInput.setAttribute('type', 'radio')
+    photoConsentYesInput.setAttribute('id', `consentyes${nextChild}`)
+    photoConsentYesInput.setAttribute('name', `childphotorelease${nextChild}`)
+    photoConsentYesInput.setAttribute('value', '1')
+    photoConsentYesInput.setAttribute('required', '')
+    photoConsentNoInput.setAttribute('class', 'form-check-input')
+    photoConsentNoInput.setAttribute('type', 'radio')
+    photoConsentNoInput.setAttribute('id', `consentno${nextChild}`)
+    photoConsentNoInput.setAttribute('name', `childphotorelease${nextChild}`)
+    photoConsentNoInput.setAttribute('value', '0')
+    photoConsentNoInput.setAttribute('required', '')
+
+    // Build form-check div
+    photoConsentDiv.appendChild(photoConsentLabel)
+    photoConsentYesDiv.appendChild(photoConsentYesInput)
+    photoConsentYesDiv.appendChild(photoConsentYesLabel)
+    photoConsentNoDiv.appendChild(photoConsentNoInput)
+    photoConsentNoDiv.appendChild(photoConsentNoLabel)
+    photoConsentDiv.appendChild(photoConsentYesDiv)
+    photoConsentDiv.appendChild(photoConsentNoDiv)
+    
+    // Append form-group to form
+    childrenDiv.appendChild(photoConsentDiv)
     
     // Incrememnt counter for next child
     nextChild++

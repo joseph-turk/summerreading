@@ -1,6 +1,6 @@
 Thank You!
 
-Your Eager Free Public Library Summer Reading registration information is displayed below.
+Your Eager Free Public Library Summer Event registration information is displayed below.
 
 Confirmation Number: {{ patron.confirmation_number }}
 
@@ -24,14 +24,14 @@ Email Address: {{ patron.email }}
 
 Phone Number: {{ patron.phone }}
 
-Consent to Use Photos of Your Child(ren): {{ patron.photo_release|yesno:"Yes,No" }}
-
 ------------------------------------
 
 Registration Information
 
 {% for child in patron.child_set.all %} {% for registration in child.registration_set.all %}
 Child Name: {{ child.name }}
+
+Consent to Use Photos: {{ child.photo_release|yesno:"Yes,No" }}
 
 Program Name: {{ registration.program.name }} {% if registration.is_wait_list %} (Wait List) {% endif %}
 
@@ -42,6 +42,6 @@ Program Time: {{ registration.program.time }}
 
 ------------------------------------
 
-You are receiving this email because this address was used to register for summer reading programs at https://efpl-summer-reading.com.
+You are receiving this email because this address was used to register for summer events at https://efplsummersignup.com.
 
 If you believe that this message was sent in error, or if any of the above information is incorrect, please reply to this email and let us know what's wrong.

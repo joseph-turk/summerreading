@@ -53,7 +53,6 @@ class Adult(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=12)
-    photo_release = models.BooleanField()
 
     @property
     def confirmation_number(self):
@@ -65,6 +64,7 @@ class Adult(models.Model):
 
 class Child(models.Model):
     name = models.CharField(max_length=100)
+    photo_release = models.BooleanField()
     adult = models.ForeignKey(Adult, on_delete=models.CASCADE)
 
     def __str__(self):

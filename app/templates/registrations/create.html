@@ -22,9 +22,9 @@
 <div class="card bg-info text-light mb-5">
   <div class="card-body">
     {% if type == 'kids' %}
-    <p class="mb-0">These events are recommended for kids entering grades 1&ndash;5 in fall. Space is limited and registration is required. For information about other events for kids at library please visit our website at <a class="text-light" href="als.lib.wi.us/EFPL">als.lib.wi.us/EFPL</a> or follow us on Facebook <a class="text-light" href="https://www.facebook.com/eagerfreepubliclibrary">@eagerfreepubliclibrary</a>.</p>
+    <p class="mb-0">These events are recommended for kids entering grades 1&ndash;5 in fall. Space is limited and registration is required. For information about other events for kids at library please visit our website at <a class="text-light" href="http://als.lib.wi.us/EFPL">als.lib.wi.us/EFPL</a> or follow us on Facebook <a class="text-light" href="https://www.facebook.com/eagerfreepubliclibrary">@eagerfreepubliclibrary</a>.</p>
     {% elif type == 'teens' %}
-    <p class="mb-0">These events are recommended for teens entering grades 6&ndash;10 in fall. Space is limited and registration is required. For information about other events at library please visit our website at <a class="text-light" href="als.lib.wi.us/EFPL">als.lib.wi.us/EFPL</a> or follow us on Facebook <a class="text-light" href="https://www.facebook.com/eagerfreepubliclibrary">@eagerfreepubliclibrary</a>.</p>
+    <p class="mb-0">These events are recommended for teens entering grades 6&ndash;10 in fall. Space is limited and registration is required. For information about other events at library please visit our website at <a class="text-light" href="http://als.lib.wi.us/EFPL">als.lib.wi.us/EFPL</a> or follow us on Facebook <a class="text-light" href="https://www.facebook.com/eagerfreepubliclibrary">@eagerfreepubliclibrary</a>.</p>
     {% endif %}
   </div>
 </div>
@@ -95,22 +95,6 @@
           <label for="adultphone">Phone Number</label>
           <input type="phone" id="adultphone" name="adultphone" class="form-control" required {% if not is_open %} disabled {% endif %}>
         </div>
-
-        <div class="form-group">
-          <label>Can we take and use photographs of your child(ren) at library events?</label>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="adultphotorelease" id="consentyes" value="1" {% if not is_open %} disabled {% endif %}>
-            <label class="form-check-label d-flex justify-content-between" for="consentyes">
-              <strong class="mr-2">Yes:</strong> <span>I hereby consent to the use of any photographs, video or audio clips of my child in news coverage or publicity for the Eager Free Public Library. This may include use in our newsletters, brochures, fliers, posters, and/or web pages.</span>
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="adultphotorelease" id="consentno" value="0" {% if not is_open %} disabled {% endif %}>
-            <label class="form-check-label d-flex justify-content-between" for="consentno">
-              <strong class="mr-2">No:</strong> <span>I do not consent to the use of photographs, video or audio clips of my child(ren).</span>
-            </label>
-          </div>
-        </div>
       </div>
 
       <div class="col-lg">
@@ -125,6 +109,22 @@
             <label for="childname1">Name (First and Last)</label>
             <input type="text" id="childname1" name="childname1" class="form-control" required {% if not is_open %} disabled {% endif %}>
           </div>
+
+          <div class="form-group">
+              <label>Can we take and use photographs of this child at library events?</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="childphotorelease1" id="consentyes1" value="1" required {% if not is_open %} disabled {% endif %}>
+                <label class="form-check-label d-flex justify-content-between" for="consentyes1">
+                  <strong class="mr-2">Yes:</strong> <span>I hereby consent to the use of any photographs, video or audio clips of this child in news coverage or publicity for the Eager Free Public Library. This may include use in our newsletters, brochures, fliers, posters, and/or web pages.</span>
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="childphotorelease1" id="consentno1" value="0" required {% if not is_open %} disabled {% endif %}>
+                <label class="form-check-label d-flex justify-content-between" for="consentno1">
+                  <strong class="mr-2">No:</strong> <span>I do not consent to the use of photographs, video or audio clips of this child.</span>
+                </label>
+              </div>
+            </div>
         </div>
 
         {% if type == 'kids' %}

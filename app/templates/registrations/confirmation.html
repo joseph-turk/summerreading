@@ -31,7 +31,6 @@
       <li><strong>Name:</strong> {{ patron.name }}</li>
       <li><strong>Email Address:</strong> {{ patron.email }}</li>
       <li><strong>Phone Number:</strong> {{ patron.phone }}</li>
-      <li><strong>Consent to Use Photos of Your Child(ren):</strong> {{ patron.photo_release|yesno:"Yes,No" }}</li>
     </ul>
   </div>
 
@@ -42,6 +41,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Consent to Use Photos</th>
           <th>Program Name</th>
           <th>Program Date</th>
           <th>Program Time</th>
@@ -53,6 +53,7 @@
           {% for registration in child.registration_set.all %}
           <tr>
             <td>{{ child.name }}</td>
+            <td>{{ child.photo_release|yesno:"Yes,No" }}</td>
             <td>
               {{ registration.program.name }}
               {% if registration.is_wait_list %}
@@ -71,6 +72,6 @@
 
 <hr>
 
-<p>If you have questions, need to cancel, or any of the above information is incorrect, please send an email to <a href="mailto:#">summer.reading@efpl.com</a> or call 608-882-2260. Please include your name and confirmation number {{ patron.confirmation_number }}.</p>
+<p>If you have questions, need to cancel, or any of the above information is incorrect, please send an email to <a href="mailto:registrations@efplsummersignup.com">registrations@efplsummersignup.com</a> or call 608-882-2260. Please include your name and confirmation number {{ patron.confirmation_number }}.</p>
 
 {% endblock content %}

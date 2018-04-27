@@ -1,7 +1,7 @@
 <div style="font-size:18px; padding:0 32px; color:#212529;">
   <h1 style="color:white; background-color:#2ca3e1; padding:32px; border-radius:4px; font-size:3em; margin-bottom:1.5rem;">Thank You!</h1>
 
-  <div style="margin-bottom:0.5em;">Your Eager Free Public Library Summer Reading registration information is displayed below.</div>
+  <div style="margin-bottom:0.5em;">Your Eager Free Public Library Summer Event registration information is displayed below.</div>
   <div><strong>Confirmation Number:</strong> {{ patron.confirmation_number }}</div>
   
   <h2 style="margin-bottom:0; margin-top:2rem;">Location Information</h2>
@@ -31,10 +31,6 @@
         <th style="text-align:right; border:1px solid #dee2e6; padding:10px">Phone Number:</th>
         <td style="border:1px solid #dee2e6; padding:10px">{{ patron.phone }}</td>
       </tr>
-      <tr>
-        <th style="text-align:right; border:1px solid #dee2e6; padding:10px">Consent to Use Photos of Your Child(ren):</th>
-        <td style="border:1px solid #dee2e6; padding:10px">{{ patron.photo_release|yesno:"Yes,No" }}</td>
-      </tr>
     </tbody>
   </table>
 
@@ -45,6 +41,7 @@
     <thead>
       <tr>
         <th style="border:1px solid #dee2e6; padding:10px">Child Name</th>
+        <th style="border:1px solid #dee2e6; padding:10px">Consent to Use Photos</th>
         <th style="border:1px solid #dee2e6; padding:10px">Program Name</th>
         <th style="border:1px solid #dee2e6; padding:10px">Program Date</th>
         <th style="border:1px solid #dee2e6; padding:10px">Program Time</th>
@@ -55,6 +52,7 @@
       {% for child in patron.child_set.all %} {% for registration in child.registration_set.all %}
       <tr>
         <td style="border:1px solid #dee2e6; padding:10px;">{{ child.name }}</td>
+        <td style="border:1px solid #dee2e6; padding:10px;">{{ child.photo_release|yesno:"Yes,No" }}</td>
         <td style="border:1px solid #dee2e6; padding:10px;">
           {{ registration.program.name }}
           {% if registration.is_wait_list %}
@@ -69,7 +67,7 @@
   </table>
 
   <div style="background-color:#666666; padding:0.5em 1em; border-radius:4px; margin-top:3em;">
-    <p style="color:white; font-size:0.75em; opacity:0.75;">You are receiving this email because this address was used to register for summer reading programs at <a href="#" style="color:white;">https://efpl-summer-reading.com</a>.</p>
+    <p style="color:white; font-size:0.75em; opacity:0.75;">You are receiving this email because this address was used to register for summer events at <a href="https://efplsummersignup.com" style="color:white;">https://efplsummersignup.com</a>.</p>
     <p style="color:white; font-size:0.75em; opacity:0.75;">If you believe that this message was sent in error, or if any of the above information is incorrect, please reply to this email and let us know what's wrong.</p>
   </div>
 </div>

@@ -16,7 +16,7 @@ from .models import Registration
 
 
 # Dates for program registrations
-reg_open = datetime(2018, 4, 27, 9)
+reg_open = datetime(2018, 4, 26, 9)
 
 
 def home(request):
@@ -96,8 +96,7 @@ def add_registration(request):
         adult, created = Adult.objects.get_or_create(
             name=request.POST['adultname'],
             email=request.POST['adultemail'],
-            phone=request.POST['adultphone'],
-            photo_release=request.POST['adultphotorelease']
+            phone=request.POST['adultphone']
         )
 
         # Add selected programs to list
@@ -109,8 +108,11 @@ def add_registration(request):
         # Iterate over children from form
         for key in request.POST:
             if key.startswith('childname'):
+                child_number = key[9:]
+                photo_release_key = 'childphotorelease' + child_number
                 child, created = Child.objects.get_or_create(
                     name=request.POST[key],
+                    photo_release=request.POST[photo_release_key],
                     adult=adult
                 )
 
