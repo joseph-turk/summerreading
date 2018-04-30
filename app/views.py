@@ -16,7 +16,7 @@ from .models import Registration
 
 
 # Dates for program registrations
-reg_open = datetime(2018, 4, 26, 9)
+reg_open = datetime(2018, 5, 26, 9, 30)
 
 
 def home(request):
