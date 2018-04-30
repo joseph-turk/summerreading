@@ -60,7 +60,7 @@
           {% endif %}
         </td>
         <td style="border:1px solid #dee2e6; padding:10px;">{{ registration.program.date }}</td>
-        <td style="border:1px solid #dee2e6; padding:10px;">{{ registration.program.time }}</td>
+        <td style="border:1px solid #dee2e6; padding:10px;">{{ registration.program.time }}–{{ registration.program.time_end }}</td>
       </tr>
       {% endfor %} {% endfor %}
     </tbody>

@@ -37,7 +37,7 @@ Program Name: {{ registration.program.name }} {% if registration.is_wait_list %}
 
 Program Date: {{ registration.program.date }}
 
-Program Time: {{ registration.program.time }}
+Program Time: {{ registration.program.time }}–{{ registration.program.time_end }}
 {% endfor %} {% endfor %}
 
 ------------------------------------

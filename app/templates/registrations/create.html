@@ -62,7 +62,7 @@
           <td>{{ program.capacity }}</td>
           <td>{{ program.slots_left }}</td>
           <td>{{ program.date }}</td>
-          <td>{{ program.time }}</td>
+          <td>{{ program.time }}–{{ program.time_end }}</td>
           {% if type == 'kids' %}
           <td class="text-right"><a href="{% url 'app:kids_program_detail' program.id %}" class="btn btn-primary">Details</a></td>
           {% elif type == 'teens' %}
