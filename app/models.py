@@ -11,6 +11,7 @@ class Program(models.Model):
     description = models.TextField()
     date = models.DateField()
     time = models.TimeField()
+    time_end = models.TimeField()
     capacity = models.IntegerField()
     is_teen = models.BooleanField(default=False)
     graphic = models.ImageField(upload_to='graphics', default='graphic.jpg')
