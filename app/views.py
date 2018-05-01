@@ -140,7 +140,7 @@ def add_registration(request):
         # Send email
         send_mail(subject='Summer Reading Signup Confirmation',
                   message=txt_content,
-                  from_email='efpl@test.com',
+                  from_email='registrations@efplsummersignup.com',
                   recipient_list=[adult.email],
                   html_message=html_content,
                   fail_silently=False)
