@@ -1,7 +1,5 @@
-const requiredCheckboxes = $(":checkbox[required]");
+const requiredCheckboxes = $(':checkbox[required]')
 
 requiredCheckboxes.change(() => {
-  if (requiredCheckboxes.is(":checked"))
-    requiredCheckboxes.removeAttr("required");
-  else requiredCheckboxes.attr("required", "required");
-});
+  if (requiredCheckboxes.is(':checked')) { requiredCheckboxes.removeAttr('required') } else requiredCheckboxes.attr('required', 'required')
+})
