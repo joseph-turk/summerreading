@@ -78,4 +78,4 @@ class Registration(models.Model):
     is_wait_list = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.program.name + ' Registration for ' + self.child.name
+        return 'Program: ' + self.program.name + ' // Child: ' + self.child.name + ' // Adult: ' + self.child.adult.name
