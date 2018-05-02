@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sass": "node ./tasks/sass.js",
-    "watch": "nodemon -e scss -x 'npm run sass'"
+    "sass":
+      "node-sass --output-style compressed -o app/static/shared assets/scss",
+    "watch":
+      "nodemon -e scss -x 'node-sass --output-style compressed -o app/static/shared assets/scss'"
   },
   "repository": {
     "type": "git",

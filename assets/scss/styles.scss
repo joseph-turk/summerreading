@@ -61,3 +61,10 @@ img.program-graphic {
     font-size: 3rem;
   }
 }
+
+@media print {
+  .btn,
+  .navbar {
+    display: none !important;
+  }
+}
