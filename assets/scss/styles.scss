@@ -64,7 +64,8 @@ img.program-graphic {
 
 @media print {
   .btn,
-  .navbar {
+  .navbar,
+  .print-hide {
     display: none !important;
   }
 }

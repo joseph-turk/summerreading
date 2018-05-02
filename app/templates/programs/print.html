@@ -34,6 +34,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Photo Release</th>
           <th>Parent or Guardian</th>
           <th>Phone Number</th>
         </tr>
@@ -43,6 +44,7 @@
         {% for registration in program.registration_set.all %} {% if not registration.is_wait_list %}
         <tr>
           <td>{{ registration.child }}</td>
+          <td>{{ registration.child.photo_release|yesno:"Yes,No" }}</td>
           <td>{{ registration.child.adult.name }}</td>
           <td>{{ registration.child.adult.phone }}</td>
         </tr>
@@ -58,6 +60,7 @@
         <thead>
           <tr>
             <th>Name</th>
+            <th>Photo Release</th>
             <th>Parent or Guardian</th>
             <th>Phone Number</th>
           </tr>
@@ -67,6 +70,7 @@
           {% for registration in program.registration_set.all %} {% if registration.is_wait_list %}
           <tr>
             <td>{{ registration.child }}</td>
+            <td>{{ registration.child.photo_release|yesno:"Yes,No" }}</td>
             <td>{{ registration.child.adult.name }}</td>
             <td>{{ registration.child.adult.phone }}</td>
           </tr>

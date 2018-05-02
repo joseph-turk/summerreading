@@ -13,7 +13,7 @@
 <hr>
 
 <div class="row">
-  <div class="col-xl">
+  <div class="col-xl-5">
     <h3 class="mt-3">Parent or Guardian Information</h3>
 
     <table style="width:auto" class="table">
@@ -30,22 +30,19 @@
           <th>Phone Number</th>
           <td>{{ patron.phone }}</td>
         </tr>
-        <tr>
-          <th>Photo Release Consent</th>
-          <td>{{ patron.photo_release|yesno:"Yes,No" }}</td>
-        </tr>
       </tbody>
     </table>
   </div>
 
-  <div class="col-xl">
+  <div class="col-xl-7">
     <h3 class="mt-3">Registration Information</h3>
 
     <table class="table">
       <thead>
         <tr>
-          <th></th>
+          <th class="print-hide"></th>
           <th>Name</th>
+          <th>Consent to Use Photos</th>
           <th>Program Name</th>
           <th>Program Date</th>
           <th>Program Time</th>
@@ -56,10 +53,11 @@
         {% for child in patron.child_set.all %}
           {% for registration in child.registration_set.all %}
           <tr>
-            <td>
+            <td class="print-hide">
               <a href="{% url 'admin:app_registration_change' registration.id %}">Edit</a>
             </td>
             <td>{{ child.name }}</td>
+            <td>{{ child.photo_release|yesno:"Yes,No" }}</td>
             <td>
               {{ registration.program.name }}
               {% if registration.is_wait_list %}
