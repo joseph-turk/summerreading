@@ -52,7 +52,7 @@
     <tbody>
       {% for program in programs %}
         <tr>
-          <td><input type="checkbox" name="program-{{ program.id }}" id="program-{{ program.id }}" {% if not is_open %} disabled {% endif %}></td>
+          <td><input type="checkbox" name="program-{{ program.id }}" id="program-{{ program.id }}" required {% if not is_open %} disabled {% endif %}></td>
           <td><label for="program-{{ program.id }}">
             {{ program.name }}
             {% if program.is_full %}
@@ -144,4 +144,5 @@
 
 {% block scripts %}
 <script src="{% static 'shared/multiadd.js' %}"></script>
+<script src="{% static 'shared/validateCheckboxes.js' %}"></script>
 {% endblock scripts %}
