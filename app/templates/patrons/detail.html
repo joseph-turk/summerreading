@@ -42,6 +42,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th></th>
           <th>Name</th>
           <th>Program Name</th>
           <th>Program Date</th>
@@ -53,6 +54,9 @@
         {% for child in patron.child_set.all %}
           {% for registration in child.registration_set.all %}
           <tr>
+            <td>
+              <a href="{% url 'admin:app_registration_change' registration.id %}">Edit</a>
+            </td>
             <td>{{ child.name }}</td>
             <td>
               {{ registration.program.name }}
