@@ -50,7 +50,7 @@
 
       <tbody>
         {% for child in patron.child_set.all %}
-          {% for registration in child.registration_set.all %}
+          {% for registration in child.registration_set.all|dictsort:"program.date" %}
           <tr>
             <td>{{ child.name }}</td>
             <td>{{ child.photo_release|yesno:"Yes,No" }}</td>

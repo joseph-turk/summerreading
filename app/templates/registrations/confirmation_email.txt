@@ -28,7 +28,7 @@ Phone Number: {{ patron.phone }}
 
 Registration Information
 
-{% for child in patron.child_set.all %} {% for registration in child.registration_set.all %}
+{% for child in patron.child_set.all %} {% for registration in child.registration_set.all|dictsort:"program.date" %}
 Child Name: {{ child.name }}
 
 Consent to Use Photos: {{ child.photo_release|yesno:"Yes,No" }}

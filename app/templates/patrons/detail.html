@@ -51,7 +51,7 @@
 
       <tbody>
         {% for child in patron.child_set.all %}
-          {% for registration in child.registration_set.all %}
+          {% for registration in child.registration_set.all|dictsort:"program.date" %}
           <tr>
             <td class="print-hide">
               <a href="{% url 'admin:app_registration_change' registration.id %}">Edit</a>

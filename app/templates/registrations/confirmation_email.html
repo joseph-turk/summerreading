@@ -49,7 +49,7 @@
     </thead>
 
     <tbody>
-      {% for child in patron.child_set.all %} {% for registration in child.registration_set.all %}
+      {% for child in patron.child_set.all %} {% for registration in child.registration_set.all|dictsort:"program.date" %}
       <tr>
         <td style="border:1px solid #dee2e6; padding:10px;">{{ child.name }}</td>
         <td style="border:1px solid #dee2e6; padding:10px;">{{ child.photo_release|yesno:"Yes,No" }}</td>
