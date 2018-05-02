@@ -36,7 +36,7 @@
         <td>{{ program.slots_filled }}</td>
         <td>{{ program.num_wait_list }}</td>
         <td>{{ program.date }}</td>
-        <td>{{ program.time }}</td>
+        <td>{{ program.time }}–{{ program.time_end }}</td>
         <td class="text-right"><a class="btn btn-primary" href="{% url 'app:detail' program.id %}">Details</a></td>
         <td class="text-right"><a class="btn btn-primary" href="{% url 'app:print' program.id %}">Print</a></td>
       </tr>
