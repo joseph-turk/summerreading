@@ -1,0 +1,24 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-xl-8 offset-xl-2">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="display-4">Success</h2>
+        
+        <p class="h4 mb-4 font-weight-normal">
+          The confirmation email has been resent for {{ patron.name }}.<br>
+          Please ask the patron to check their inbox.
+        </p>
+
+        <a href="{% url 'app:patron' patron.id %}" class="btn btn-primary">
+          Back to Patron Details
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -156,6 +156,35 @@ def confirmation(request, pk):
 
 
 @login_required(login_url='/admin/login/')
+def resend_confirmation(request, pk):
+    '''Resends a patrons confirmation email'''
+    adult = get_object_or_404(Adult, pk=pk)
+    # Create HTML Template for Email
+    email_html = get_template('registrations/confirmation_email.html')
+    html_content = email_html.render({'patron': adult})
+
+    # Create Plain Text Template for Email
+    email_txt = get_template('registrations/confirmation_email.txt')
+    txt_content = email_txt.render({'patron': adult})
+
+    # Send email
+    send_mail(subject='Summer Reading Signup Confirmation',
+              message=txt_content,
+              from_email='registrations@efplsummersignup.com',
+              recipient_list=[adult.email],
+              html_message=html_content,
+              fail_silently=False)
+
+    return redirect('app:confirmation_resent', pk=pk)
+
+
+@login_required(login_url='/admin/login/')
+def confirmation_resent(request, pk):
+    patron = get_object_or_404(Adult, pk=pk)
+    return render(request, 'patrons/confirmation_resent.html', {'patron': patron})
+
+
+@login_required(login_url='/admin/login/')
 def programs(request):
     '''Shows a list of programs'''
     programs = get_list_or_404(Program.objects.order_by('date'))

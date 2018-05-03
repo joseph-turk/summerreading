@@ -33,5 +33,9 @@ urlpatterns = [
     path('events/<int:pk>', views.ProgramDetail.as_view(), name='detail'),
     path('events/<int:pk>/print', views.program_print, name='print'),
     path('patrons/', views.patrons, name='patrons'),
-    path('patrons/<uuid:pk>', views.patron_detail, name='patron')
+    path('patrons/<uuid:pk>', views.patron_detail, name='patron'),
+    path('patrons/<uuid:pk>/resend_confirmation',
+         views.resend_confirmation, name='resend_confirmation'),
+    path('patrons/<uuid:pk>/confirmation_resent',
+         views.confirmation_resent, name='confirmation_resent')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

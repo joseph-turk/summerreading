@@ -7,6 +7,7 @@
     <h2 class="display-4">Summer Signup Details</h2>
 
     <button class="btn btn-primary" onclick="window.print()">Print</button>
+    <a href="{% url 'app:resend_confirmation' patron.id %}" class="btn btn-primary">Resend Confirmation Email</a>
   </div>
 </div>
 
