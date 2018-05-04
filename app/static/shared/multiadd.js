@@ -19,11 +19,11 @@ function addChild () {
     newChildInput.setAttribute('id', `childname${nextChild}`)
     newChildInput.setAttribute('name', `childname${nextChild}`)
     newChildInput.setAttribute('required', '')
-    
+
     // Build form-group div
     newChildDiv.appendChild(newChildLabel)
     newChildDiv.appendChild(newChildInput)
-    
+
     // Append form-group to form
     childrenDiv.appendChild(newChildDiv)
 
@@ -37,15 +37,21 @@ function addChild () {
     let photoConsentLabel = document.createElement('label')
     let photoConsentYesLabel = document.createElement('label')
     let photoConsentNoLabel = document.createElement('label')
-    let photoConsentLabelContent = document.createTextNode('Can we take and use photographs of this child at library events?')
+    let photoConsentLabelContent = document.createTextNode(
+      'Can we take and use photographs of this child at library events?'
+    )
     let photoConsentYesLabelContentStrong = document.createElement('strong')
     let photoConsentYesLabelDetailsSpan = document.createElement('span')
     let photoConsentYesLabelContent = document.createTextNode('Yes:')
-    let photoConsentYesLabelDetails = document.createTextNode('I hereby consent to the use of any photographs, video or audio clips of this child in news coverage or publicity for the Eager Free Public Library. This may include use in our newsletters, brochures, fliers, posters, and/or web pages.')
+    let photoConsentYesLabelDetails = document.createTextNode(
+      'I hereby consent to the use of any photographs, video or audio clips of this child in news coverage or publicity for the Eager Free Public Library. This may include use in our newsletters, brochures, fliers, posters, and/or web pages.'
+    )
     let photoConsentNoLabelContentStrong = document.createElement('strong')
     let photoConsentNoLabelDetailsSpan = document.createElement('span')
     let photoConsentNoLabelContent = document.createTextNode('No:')
-    let photoConsentNoLabelDetails = document.createTextNode('I do not consent to the use of photographs, video or audio clips of this child.')
+    let photoConsentNoLabelDetails = document.createTextNode(
+      'I do not consent to the use of photographs, video or audio clips of this child.'
+    )
     let photoConsentYesInput = document.createElement('input')
     let photoConsentNoInput = document.createElement('input')
 
@@ -55,8 +61,14 @@ function addChild () {
     photoConsentNoDiv.setAttribute('class', 'form-check')
     photoConsentYesLabel.setAttribute('for', `consentyes${nextChild}`)
     photoConsentNoLabel.setAttribute('for', `consentno${nextChild}`)
-    photoConsentYesLabel.setAttribute('class', 'form-check-label d-flex justify-content-between')
-    photoConsentNoLabel.setAttribute('class', 'form-check-label d-flex justify-content-between')
+    photoConsentYesLabel.setAttribute(
+      'class',
+      'form-check-label d-flex justify-content-between'
+    )
+    photoConsentNoLabel.setAttribute(
+      'class',
+      'form-check-label d-flex justify-content-between'
+    )
     photoConsentLabel.appendChild(photoConsentLabelContent)
     photoConsentYesLabelContentStrong.setAttribute('class', 'mr-2')
     photoConsentNoLabelContentStrong.setAttribute('class', 'mr-2')
@@ -89,14 +101,44 @@ function addChild () {
     photoConsentNoDiv.appendChild(photoConsentNoLabel)
     photoConsentDiv.appendChild(photoConsentYesDiv)
     photoConsentDiv.appendChild(photoConsentNoDiv)
-    
+
     // Append form-group to form
     childrenDiv.appendChild(photoConsentDiv)
-    
+
+    // Create element for removing current child
+    let removeChildButton = document.createElement('button')
+    let removeChildButtonContent = document.createTextNode('Remove')
+    removeChildButton.appendChild(removeChildButtonContent)
+
+    // Set attributes for remove child button
+    removeChildButton.setAttribute('type', 'button')
+    removeChildButton.setAttribute('class', 'btn btn-secondary btn-sm')
+    removeChildButton.setAttribute('id', `removeChild${nextChild}`)
+
+    // Add event listener
+    removeChildButton.addEventListener('click', () => {
+      newChildDiv.remove()
+      photoConsentDiv.remove()
+      removeChildButton.remove()
+    })
+
+    // Append remove child button to form
+    childrenDiv.appendChild(removeChildButton)
+
     // Incrememnt counter for next child
     nextChild++
-  }  
+  }
 }
+
+// Function to remove child
+// function removeChild (event) {
+//   const childId = event.target.getAttribute('id').substring(11)
+//   const newChildDiv = document.getElementById(`newChild${childId}`)
+//   const photoConsentDiv = document.getElementById(`photoConsent${childId}`)
+//   childrenDiv.removeChild(newChildDiv)
+//   childrenDiv.removeChild(photoConsentDiv)
+//   childrenDiv.removeChild(event.target)
+// }
 
 // Get relevant DOM elements
 const addChildButton = document.getElementById('addChild')
