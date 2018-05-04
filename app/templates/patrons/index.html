@@ -9,7 +9,6 @@
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
-      <th>Photo Release</th>
       <th>Children</th>
       <th></th>
     </tr>
@@ -21,7 +20,6 @@
         <td>{{ patron.name }}</td>
         <td>{{ patron.email }}</td>
         <td>{{ patron.phone }}</td>
-        <td>{{ patron.photo_release|yesno:"Yes,No" }}</td>
         <td>
           {% for child in patron.child_set.all %}
             <div class="font-weight-bold">{{ child.name }}</div>

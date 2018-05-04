@@ -5,6 +5,11 @@ function addChild () {
     // Prevent adding another child if blank input is available
     lastChild.focus()
   } else {
+    // Create horizontal rule element
+    let hr = document.createElement('hr')
+    hr.setAttribute('class', 'mt-3')
+    childrenDiv.appendChild(hr)
+
     // Create elements for name form group
     let newChildDiv = document.createElement('div')
     let newChildLabel = document.createElement('label')
@@ -117,6 +122,7 @@ function addChild () {
 
     // Add event listener
     removeChildButton.addEventListener('click', () => {
+      hr.remove()
       newChildDiv.remove()
       photoConsentDiv.remove()
       removeChildButton.remove()
