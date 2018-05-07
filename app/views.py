@@ -16,12 +16,18 @@ from .models import Registration
 
 
 # Dates for program registrations
-reg_open = datetime(2018, 5, 26, 9, 30)
+# reg_open = datetime(2018, 5, 26, 9, 30)
+reg_open = datetime(2018, 5, 4, 7, 15)
 
 
 def home(request):
     '''App home page'''
     return render(request, 'home/index.html')
+
+
+def faq(request):
+    '''FAQ page'''
+    return render(request, 'home/faq.html')
 
 
 class ProgramList(generic.ListView):

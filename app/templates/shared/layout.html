@@ -28,6 +28,9 @@
             <li class="nav-item {% if request.path|slice:':6' == '/teens' %} active {% endif %}">
               <a href="{% url 'app:teens_home' %}" class="nav-link">Teens</a>
             </li>
+            <li class="nav-item {% if request.path|slice:':4' == '/faq' %} active {% endif %}">
+              <a href="{% url 'app:faq' %}" class="nav-link">FAQ</a>
+            </li>
             {% if user.is_authenticated %}
             <li class="nav-item {% if request.path|slice:':7' == '/events' %} active {% endif %}">
               <a class="nav-link" href="{% url 'app:programs' %}">All Events</a>

@@ -1,0 +1,36 @@
+{% extends 'shared/layout.html' %} {% load static %} {% block content %}
+
+<h2 class="display-4">
+  Kids & Teen Summer Library Club
+  <br><small>Sign Up FAQs</small>
+</h2>
+
+<hr>
+
+<dl class="my-4">
+  <dt>When does registration open and close?</dt>
+  <dd>Registration will open Saturday, May 26th at 9:30am. Registration will be open all summer. If an event is full, you can sign up for the waitlist.</dd>
+  
+  <dt>Where do I register?</dt>
+  <dd>You can register online, over the phone, or at the library. You can access the online registration from the <a href="http://als.lib.wi.us/EFPL">library website</a>, our <a href="https://www.facebook.com/eagerfreepubliclibrary">Facebook page</a>, and on this website.</dd>
+
+  <dt>How long do I have to complete the online registration?</dt>
+  <dd>You will not be timed out of the registration site, but your spot will not be reserved until you click “register”.</dd>
+
+  <dt>How can I tell if an event has open spots?</dt>
+  <dd>Just visit the <a href="{% url 'app:kids_home' %}">Kids</a> or <a href="{% url 'app:teens_home' %}">Teens</a> registration page and you’ll see how many spots are available for each event.</dd>
+
+  <dt>How will I know if I’m moved off the waitlist and able to attend an event?</dt>
+  <dd>You will receive a call or email from library staff if a spot opens up for you.</dd>
+
+  <dt>What do I do if I need to cancel or change my reservation?</dt>
+  <dd>Call the library at 608-882-2260 and we will be happy to update your registration.</dd>
+
+  <dt>What should I do if never received a confirmation email or I forgot what I signed up for?</dt>
+  <dd>Check your junk or spam folder for an email from registrations@efplsummersignup.com. If you still need help, call the library at 608-882-2260.</dd>
+
+  <dt>Where are these events located?</dt>
+  <dd>All registered events will be held at the Evansville Youth Center located at 209 S 1st St. Evansville, WI 53536.</dd>
+</dl>
+
+{% endblock %}

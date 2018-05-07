@@ -11,6 +11,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('kids/', views.register_kids, name='kids_home'),
     path('teens/', views.register_teens, name='teens_home'),
+    path('faq/', views.faq, name='faq'),
 
     # Program Views
     path('kids/events/<int:pk>',
