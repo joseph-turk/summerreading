@@ -209,9 +209,10 @@ def send_reminder_emails(request):
     patrons = []
 
     for program in programs:
-        for registration in program.registration_set.all():
-            if not registration.child.adult in patrons:
-                patrons.append(registration.child.adult)
+        if program.is_this_week:
+            for registration in program.registration_set.all():
+                if not registration.child.adult in patrons:
+                    patrons.append(registration.child.adult)
 
     for patron in patrons:
         send_reminder_email(patron.id)
@@ -226,9 +227,10 @@ def reminder_emails_sent(request):
     patrons = []
 
     for program in programs:
-        for registration in program.registration_set.all():
-            if not registration.child.adult in patrons:
-                patrons.append(registration.child.adult)
+        if program.is_this_week:
+            for registration in program.registration_set.all():
+                if not registration.child.adult in patrons:
+                    patrons.append(registration.child.adult)
 
     return render(request, 'registrations/reminders_sent.html', {'patrons': patrons})
 

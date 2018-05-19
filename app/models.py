@@ -24,7 +24,7 @@ class Program(models.Model):
     @property
     def is_this_week(self):
         next_week = date.today() + timedelta(weeks=1)
-        return self.date > date.today() and self.date < next_week
+        return self.date >= date.today() and self.date < next_week
 
     @property
     def slots_left(self):
