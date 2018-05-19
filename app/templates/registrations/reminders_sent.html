@@ -1,0 +1,56 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="display-4">Reminder Emails Sent</h2>
+        
+        <p class="h4 mb-4 font-weight-normal">
+          An event reminder email has been resent for the following patrons and programs.
+        </p>
+
+        <a href="{% url 'app:programs' %}" class="btn btn-primary">
+          Back to All Events
+        </a>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Adult Name</th>
+          <th>Email Address</th>
+          <th>Children Registered</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        {% for patron in patrons %}
+          <tr>
+            <td>{{ patron.name }}</td>
+            <td>{{ patron.email }}</td>
+            <td>
+              <ul>
+                {% for child in patron.child_set.all %}
+                  {% for registration in child.registration_set.all %}
+                    {% if registration.program.is_this_week and not registration.is_wait_list %}
+                      <li>
+                        {{ registration.child.name }} ({{ registration.program.name }})
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+              </ul>
+              {{ child.name }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

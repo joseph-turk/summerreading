@@ -3,10 +3,14 @@
 {% block content %}
 
 <div class="d-flex flex-wrap align-items-center justify-content-between">
-    <h2 class="display-4">Events Happening Next Week</h2>
-  
-    <a href="{% url 'app:programs' %}" class="btn btn-secondary">All Events</a>
-  </div>
+  <h2 class="display-4">Events Happening Next Week</h2>
+
+  <a href="{% url 'app:programs' %}" class="btn btn-secondary">All Events</a>
+</div>
+
+<div class="my-3">
+  <a href="{% url 'app:send_reminders' %}" class="btn btn-success">Send Reminder Emails</a>
+</div>
 
 <table class="table">
   <thead>

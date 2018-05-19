@@ -216,7 +216,21 @@ def send_reminder_emails(request):
     for patron in patrons:
         send_reminder_email(patron.id)
 
-    return render(request, 'programs/next_week.html', {'programs': programs})
+    return redirect('app:reminders_sent')
+
+
+@login_required(login_url='/admin/login/')
+def reminder_emails_sent(request):
+    programs = get_list_or_404(Program.objects.order_by('date'))
+
+    patrons = []
+
+    for program in programs:
+        for registration in program.registration_set.all():
+            if not registration.child.adult in patrons:
+                patrons.append(registration.child.adult)
+
+    return render(request, 'registrations/reminders_sent.html', {'patrons': patrons})
 
 
 @login_required(login_url='/admin/login/')
