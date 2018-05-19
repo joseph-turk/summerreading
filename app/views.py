@@ -16,8 +16,7 @@ from .models import Registration
 
 
 # Dates for program registrations
-# reg_open = datetime(2018, 5, 26, 9, 30)
-reg_open = datetime(2018, 5, 4, 7, 15)
+reg_open = datetime(2018, 5, 26, 9, 30)
 
 
 def home(request):
@@ -87,12 +86,8 @@ def add_registration(request):
     # Check if registrations are open yet
     if datetime.now() < reg_open:
         if request.POST['registrationtype'] == 'kids':
-            programs = get_list_or_404(
-                Program, is_teen=False, date__gt=datetime.today())
             return redirect('app:kids_home')
         else:
-            programs = get_list_or_404(
-                Program, is_teen=True, date__gt=datetime.today())
             return redirect('app:teens_home')
     else:
         # Initialize list of programs to register for
