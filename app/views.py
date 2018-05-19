@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
@@ -13,6 +13,8 @@ from .models import Program
 from .models import Adult
 from .models import Child
 from .models import Registration
+
+from .tasks import send_reminder_email
 
 
 # Dates for program registrations
@@ -139,7 +141,7 @@ def add_registration(request):
         txt_content = email_txt.render({'patron': adult})
 
         # Send email
-        send_mail(subject='Summer Reading Signup Confirmation',
+        send_mail(subject='Summer Library Event Signup Confirmation',
                   message=txt_content,
                   from_email='registrations@efplsummersignup.com',
                   recipient_list=[adult.email],
@@ -169,7 +171,7 @@ def resend_confirmation(request, pk):
     txt_content = email_txt.render({'patron': adult})
 
     # Send email
-    send_mail(subject='Summer Reading Signup Confirmation',
+    send_mail(subject='Summer Library Event Signup Confirmation',
               message=txt_content,
               from_email='registrations@efplsummersignup.com',
               recipient_list=[adult.email],
@@ -190,6 +192,31 @@ def programs(request):
     '''Shows a list of programs'''
     programs = get_list_or_404(Program.objects.order_by('date'))
     return render(request, 'programs/index.html', {'programs': programs})
+
+
+@login_required(login_url='/admin/login/')
+def programs_next_week(request):
+    '''Shows a list of the programs for the next week'''
+    programs = get_list_or_404(Program.objects.order_by('date'))
+    return render(request, 'programs/next_week.html', {'programs': programs})
+
+
+@login_required(login_url='/admin/login/')
+def send_reminder_emails(request):
+    '''Sends the reminder emails for programs next week'''
+    programs = get_list_or_404(Program.objects.order_by('date'))
+
+    patrons = []
+
+    for program in programs:
+        for registration in program.registration_set.all():
+            if not registration.child.adult in patrons:
+                patrons.append(registration.child.adult)
+
+    for patron in patrons:
+        send_reminder_email(patron.id)
+
+    return render(request, 'programs/next_week.html', {'programs': programs})
 
 
 @login_required(login_url='/admin/login/')

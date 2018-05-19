@@ -1,0 +1,45 @@
+Summer Library Event Reminder
+
+You have confirmed registrations for events at the library this week. Please let us know if you won't be able to attend any of these events.
+
+------------------------------------
+
+Location Information
+
+Due to the Library Expansion Project construction, these events will take place at the Evansville Youth Center.
+
+Address: 209 S 1st St, Evansville, WI 53536
+
+Phone Number: 608-882-0372
+
+------------------------------------
+
+Parent or Guardian Information
+
+Name: {{ patron.name }}
+
+Email Address: {{ patron.email }}
+
+Phone Number: {{ patron.phone }}
+
+------------------------------------
+
+Registration Information for This Week
+
+{% for child in patron.child_set.all %} {% for registration in child.registration_set.all|dictsort:"program.date" %} {% if registration.program.is_this_week and not registration.is_wait_list %}
+Child Name: {{ child.name }}
+
+Consent to Use Photos: {{ child.photo_release|yesno:"Yes,No" }}
+
+Program Name: {{ registration.program.name }} {% if registration.is_wait_list %} (Wait List) {% endif %}
+
+Program Date: {{ registration.program.date }}
+
+Program Time: {{ registration.program.time }}–{{ registration.program.time_end }}
+{% endif %} {% endfor %} {% endfor %}
+
+------------------------------------
+
+You are receiving this email because this address was used to register for summer events at https://efplsummersignup.com.
+
+If you believe that this message was sent in error, or if any of the above information is incorrect, please reply to this email and let us know what's wrong.

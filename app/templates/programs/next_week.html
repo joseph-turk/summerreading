@@ -1,0 +1,53 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex flex-wrap align-items-center justify-content-between">
+    <h2 class="display-4">Events Happening Next Week</h2>
+  
+    <a href="{% url 'app:programs' %}" class="btn btn-secondary">All Events</a>
+  </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Capacity</th>
+      <th>Registered</th>
+      <th>Wait Listed</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for program in programs %}
+      {% if program.is_this_week %}
+        <tr>
+          <td>
+            {% if program.is_past %}
+            <div class="status-past"></div>
+            {% elif program.is_full %}
+            <div class="status-full"></div>
+            {% else %}
+            <div class="status-open"></div>
+            {% endif %}
+          </td>
+          <td>{{ program.name }}</td>
+          <td>{{ program.capacity }}</td>
+          <td>{{ program.slots_filled }}</td>
+          <td>{{ program.num_wait_list }}</td>
+          <td>{{ program.date }}</td>
+          <td>{{ program.time }}–{{ program.time_end }}</td>
+          <td class="text-right"><a class="btn btn-primary" href="{% url 'app:detail' program.id %}">Details</a></td>
+          <td class="text-right"><a class="btn btn-primary" href="{% url 'app:print' program.id %}">Print</a></td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

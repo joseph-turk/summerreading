@@ -2,7 +2,11 @@
 {% load static %}
 {% block content %}
 
-<h2 class="display-4">All Programs</h2>
+<div class="d-flex flex-wrap align-items-center justify-content-between">
+  <h2 class="display-4">All Events</h2>
+
+  <a href="{% url 'app:next-week' %}" class="btn btn-secondary">Next Week</a>
+</div>
 
 <table class="table">
   <thead>

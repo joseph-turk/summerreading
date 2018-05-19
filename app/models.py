@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.core.validators import RegexValidator
-from datetime import date
+from datetime import date, timedelta
 from time import time
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -20,6 +20,11 @@ class Program(models.Model):
     @property
     def is_past(self):
         return self.date < date.today()
+
+    @property
+    def is_this_week(self):
+        next_week = date.today() + timedelta(weeks=1)
+        return self.date > date.today() and self.date < next_week
 
     @property
     def slots_left(self):

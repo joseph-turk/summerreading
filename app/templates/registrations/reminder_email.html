@@ -1,0 +1,49 @@
+<div style="font-size:18px; padding:0 32px; color:#212529;">
+    <h1 style="color:white; background-color:#2ca3e1; padding:32px; border-radius:4px; font-size:3em; margin-bottom:1.5rem;">Summer Library Event Reminder</h1>
+  
+    <div style="margin-bottom:0.5em;">You have confirmed registrations for events at the library this week. Please let us know if you won't be able to attend any of these events.</div>
+    
+    <h2 style="margin-bottom:0; margin-top:2rem;">Location Information</h2>
+    <hr style="border-color:#dee2e6; opacity:0.5; margin-bottom:1.5em;">
+  
+    <p>Due to the Library Expansion Project construction, these events will take place at the Evansville Youth Center.</p>
+  
+    <ul>
+      <li><strong>Address:</strong> 209 S 1st St, Evansville, WI 53536</li>
+      <li><strong>Phone:</strong> 608-882-0372</li>
+    </ul>
+  
+    <h2 style="margin-bottom:0; margin-top:2rem;">Registration Information for This Week</h2>
+    <hr style="border-color:#dee2e6; opacity:0.5; margin-bottom:1.5em;">
+  
+    <table style="border-collapse:collapse; margin-bottom:1em;">
+      <thead>
+        <tr>
+          <th style="border:1px solid #dee2e6; padding:10px">Child Name</th>
+          <th style="border:1px solid #dee2e6; padding:10px">Consent to Use Photos</th>
+          <th style="border:1px solid #dee2e6; padding:10px">Program Name</th>
+          <th style="border:1px solid #dee2e6; padding:10px">Program Date</th>
+          <th style="border:1px solid #dee2e6; padding:10px">Program Time</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        {% for child in patron.child_set.all %} {% for registration in child.registration_set.all|dictsort:"program.date" %} {% if registration.program.is_this_week and not registration.is_wait_list %}
+        <tr>
+          <td style="border:1px solid #dee2e6; padding:10px;">{{ child.name }}</td>
+          <td style="border:1px solid #dee2e6; padding:10px;">{{ child.photo_release|yesno:"Yes,No" }}</td>
+          <td style="border:1px solid #dee2e6; padding:10px;">
+            {{ registration.program.name }}
+          </td>
+          <td style="border:1px solid #dee2e6; padding:10px;">{{ registration.program.date }}</td>
+          <td style="border:1px solid #dee2e6; padding:10px;">{{ registration.program.time }}–{{ registration.program.time_end }}</td>
+        </tr>
+        {% endif %} {% endfor %} {% endfor %}
+      </tbody>
+    </table>
+  
+    <div style="background-color:#666666; padding:0.5em 1em; border-radius:4px; margin-top:3em;">
+      <p style="color:white; font-size:0.75em; opacity:0.75;">You are receiving this email because this address was used to register for summer events at <a href="https://efplsummersignup.com" style="color:white;">https://efplsummersignup.com</a>.</p>
+      <p style="color:white; font-size:0.75em; opacity:0.75;">If you believe that this message was sent in error, or if any of the above information is incorrect, please reply to this email and let us know what's wrong.</p>
+    </div>
+  </div>

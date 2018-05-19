@@ -33,6 +33,7 @@ urlpatterns = [
     path('events/', views.programs, name='programs'),
     path('events/<int:pk>', views.ProgramDetail.as_view(), name='detail'),
     path('events/<int:pk>/print', views.program_print, name='print'),
+    path('events/next-week/', views.programs_next_week, name='next-week'),
     path('patrons/', views.patrons, name='patrons'),
     path('patrons/<uuid:pk>', views.patron_detail, name='patron'),
     path('patrons/<uuid:pk>/resend_confirmation',

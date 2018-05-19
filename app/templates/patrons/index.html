@@ -24,7 +24,12 @@
           {% for child in patron.child_set.all %}
             <div class="font-weight-bold">{{ child.name }}</div>
             {% for registration in child.registration_set.all %}
-              <div>{{ registration.program.name }}</div>
+              <div>
+                {{ registration.program.name }}
+                {% if registration.is_wait_list %}
+                  <span class="text-danger">(Wait List)</span>
+                {% endif %}
+              </div>
             {% endfor %}
           {% endfor %}
         </td>
