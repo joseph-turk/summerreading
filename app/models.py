@@ -43,12 +43,24 @@ class Program(models.Model):
             return slots
 
     @property
+    def num_registered(self):
+        num = 0
+
+        for registration in self.registration_set.all():
+            if not registration.is_wait_list:
+                num += 1
+
+        return num
+
+    @property
     def num_wait_list(self):
-        num = self.registration_set.count() - self.capacity
-        if num < 0:
-            return 0
-        else:
-            return num
+        num = 0
+
+        for registration in self.registration_set.all():
+            if registration.is_wait_list:
+                num += 1
+
+        return num
 
     def __str__(self):
         return self.name
